@@ -1,5 +1,5 @@
 "use client";
-import WalletBar from "@/components/WalletBar";
+import WalletBar from "@/components/layout/wallet-bar";
 
 export default function Home() {
   return (
