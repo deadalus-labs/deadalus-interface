@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
 		<html lang="en">
-			<body className={cn("h-full", inter.className)}>
+			<body className={cn("h-full bg-slate-800", inter.className)}>
 				<StarknetProvider>
 					<Header>{children}</Header>
 				</StarknetProvider>

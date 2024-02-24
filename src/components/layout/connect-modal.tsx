@@ -15,7 +15,7 @@ export default function ConnectModal() {
 		<div className="">
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button>Connect Wallet</Button>
+					<Button className="bg-green-500">Connect Wallet</Button>
 				</DialogTrigger>
 				<DialogContent>
 					<DialogHeader>Connect Wallet</DialogHeader>
