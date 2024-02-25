@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLink } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import DepositIcon from './icons/deposit-icon';
 import FractionalizeIcon from './icons/fractionalize-icon';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './ui/table';
@@ -26,10 +27,9 @@ const CounterDeposit = () => {
 			<CardHeader className="flex justify-center items-center border-2 border-slate-800 rounded-lg h-72">
 				<div className='flex flex-col items-center justify-center w-full space-y-8'>
 					<div className='flex flex-col items-center justify-center space-y-1'>
-						<div>
-							<DepositIcon />
+						<div className='text-black'>
+							<Input type='text' placeholder='Deposit Contract' />
 						</div>
-						<p className='text-xl text-slate-300'>Deposit counter contract</p>
 					</div>
 					<div className='w-2/3'>
 						<Button className="bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A] flex justify-center items-center h-14 w-full">
