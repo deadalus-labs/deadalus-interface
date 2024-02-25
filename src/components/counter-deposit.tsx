@@ -26,10 +26,8 @@ const CounterDeposit = () => {
 		<Card className="flex flex-col lg:w-1/2 mx-auto bg-[#111827A6]/65 p-5 space-y-6 text-white border-0">
 			<CardHeader className="flex justify-center items-center border-2 border-slate-800 rounded-lg h-72">
 				<div className='flex flex-col items-center justify-center w-full space-y-8'>
-					<div className='flex flex-col items-center justify-center space-y-1'>
-						<div className='text-black'>
-							<Input type='text' placeholder='Deposit Contract' />
-						</div>
+					<div className='flex flex-col items-center justify-center space-y-1 w-2/3'>
+						<Input type='text' placeholder='Deposit Cairo Contract' className='w-full bg-transparent px-5 py-7 border-slate-800 focus-visible:ring-offset-0 focus-visible:ring-0' />
 					</div>
 					<div className='w-2/3'>
 						<Button className="bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A] flex justify-center items-center h-14 w-full">

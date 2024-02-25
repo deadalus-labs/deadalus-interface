@@ -9,18 +9,17 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import CandleStickIcon from './icons/candle-stick-icon';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './ui/table';
+import Image from 'next/image';
 
 const CounterDetail = () => {
-	const [count, setCount] = useState(0);
+	const [open, setOpen] = useState(false);
 
-	const incrementFunction = () => {
-		setCount(count + 1);
+	const openFunction = () => {
+		setOpen(true);
 	}
 
-	const decrementFunction = () => {
-		if (count > 0) {
-			setCount(count - 1);
-		}
+	const closeFunction = () => {
+		setOpen(false);
 	}
 
 	const counters = [
@@ -39,19 +38,25 @@ const CounterDetail = () => {
 			</div>
 			<CardContent className='flex w-full p-0 md:space-x-6 flex-col space-y-6 md:flex-row md:space-y-0'>
 				<div className='flex-1 space-y-6 h-full'>
-					<div className='h-64 border-2 border-slate-800 rounded-lg'>
+					<div className='h-fit py-10 border-2 border-slate-800 rounded-lg'>
 						<div className='w-full h-full flex flex-col items-center justify-center space-y-6'>
+							<div className='relative max-w-[300px] max-h-[200px] rounded-lg'>
+								<Image src='/property.png' alt='property image' width={300} height={200} />
+							</div>
 							<div className='border-2 border-slate-800 rounded-lg w-72 p-3.5 text-center'>
-								<p>{count}</p>
+								<p>{open ? "Door Opened" : "Door Closed"}</p>
 							</div>
 							<div className='flex space-x-5 items-center w-72 justify-between'>
-								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={incrementFunction}>Open Door</Button>
-								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={decrementFunction}>Close Door</Button>
+								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={openFunction}>Open Door</Button>
+								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={closeFunction}>Close Door</Button>
+							</div>
+							<div>
+								<p className='text-base sm:text-2xl font-normal'>Apartment Location</p>
 							</div>
 						</div>
 					</div>
 					<div className='h-fit border-2 border-slate-800 rounded-lg text-center p-5'>
-						<p className='text-slate-300 text-lg'>You currently don{"’"}t have permission to call Counter 1 contract.</p>
+						<p className='text-slate-300 text-lg'>You currently don{"’"}t have permission to call Deadalus property contract.</p>
 					</div>
 				</div>
 				<div className='flex-1 h-fit border-2 border-slate-800 rounded-lg'>
