@@ -8,6 +8,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import FractionalizeIcon from "../icons/fractionalize-icon";
 
 export default function ConnectModal() {
 	const { connect, connectors } = useConnect();
@@ -15,7 +16,12 @@ export default function ConnectModal() {
 		<div className="">
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button className="bg-green-500">Connect Wallet</Button>
+					<Button className="bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A] flex justify-center items-center h-14 w-[300px]">
+						<div className='flex flex-row justify-center items-center space-x-0.5'>
+							<FractionalizeIcon />
+							<p className='mt-0.5 text-lg sm:text-xl font-normal'>Connect Wallet</p>
+						</div>
+					</Button>
 				</DialogTrigger>
 				<DialogContent>
 					<DialogHeader>Connect Wallet</DialogHeader>
