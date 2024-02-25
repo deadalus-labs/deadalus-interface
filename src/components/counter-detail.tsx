@@ -32,7 +32,7 @@ const CounterDetail = () => {
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
 			<div className='w-full flex items-center justify-between'>
-				<h1 className="text-2xl font-semibold">Fractionalize Counter</h1>
+				<h1 className="text-2xl font-semibold">Property 1</h1>
 				<Button className='bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]'>
 					<CandleStickIcon />
 				</Button>
@@ -45,8 +45,8 @@ const CounterDetail = () => {
 								<p>{count}</p>
 							</div>
 							<div className='flex space-x-5 items-center w-72 justify-between'>
-								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={incrementFunction}>Increment</Button>
-								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={decrementFunction}>Decrement</Button>
+								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={incrementFunction}>Open Door</Button>
+								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={decrementFunction}>Close Door</Button>
 							</div>
 						</div>
 					</div>
