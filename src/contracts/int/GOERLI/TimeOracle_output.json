@@ -1,0 +1,60 @@
+{
+    "address": "0xcddd9350cdd8c9cbea13a7184c8d1f314306858fe7e1137f8a6a89c3f51c8e",
+    "chain_id": "<StarknetChainId.GOERLI: 1536727068981429685321>",
+    "abi": [
+        {
+            "type": "impl",
+            "name": "TimeOracle",
+            "interface_name": "deadalus::oracle::time_oracle::ITimeOracle"
+        },
+        {
+            "type": "struct",
+            "name": "core::integer::u256",
+            "members": [
+                {
+                    "name": "low",
+                    "type": "core::integer::u128"
+                },
+                {
+                    "name": "high",
+                    "type": "core::integer::u128"
+                }
+            ]
+        },
+        {
+            "type": "interface",
+            "name": "deadalus::oracle::time_oracle::ITimeOracle",
+            "items": [
+                {
+                    "type": "function",
+                    "name": "set_time",
+                    "inputs": [
+                        {
+                            "name": "unix_timestamp",
+                            "type": "core::integer::u256"
+                        }
+                    ],
+                    "outputs": [],
+                    "state_mutability": "external"
+                },
+                {
+                    "type": "function",
+                    "name": "get_time",
+                    "inputs": [],
+                    "outputs": [
+                        {
+                            "type": "core::integer::u256"
+                        }
+                    ],
+                    "state_mutability": "external"
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "name": "deadalus::oracle::time_oracle::TimeOracle::Event",
+            "kind": "enum",
+            "variants": []
+        }
+    ]
+}

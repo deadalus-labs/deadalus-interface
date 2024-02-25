@@ -1,0 +1,52 @@
+{
+    "address": "0x4773c2ed572628b9a52ac2955d86575d2e2b9bd8c4fa9b5bc25ac02425ca621",
+    "chain_id": "<StarknetChainId.GOERLI: 1536727068981429685321>",
+    "abi": [
+        {
+            "type": "impl",
+            "name": "CounterFactory",
+            "interface_name": "deadalus::counter::counter_factory::ICounterFactory"
+        },
+        {
+            "type": "interface",
+            "name": "deadalus::counter::counter_factory::ICounterFactory",
+            "items": [
+                {
+                    "type": "function",
+                    "name": "deploy_counter_contract",
+                    "inputs": [],
+                    "outputs": [],
+                    "state_mutability": "external"
+                },
+                {
+                    "type": "function",
+                    "name": "set_counter_classhash",
+                    "inputs": [
+                        {
+                            "name": "class_hash",
+                            "type": "core::starknet::class_hash::ClassHash"
+                        }
+                    ],
+                    "outputs": [],
+                    "state_mutability": "external"
+                }
+            ]
+        },
+        {
+            "type": "constructor",
+            "name": "constructor",
+            "inputs": [
+                {
+                    "name": "class_hash",
+                    "type": "core::starknet::class_hash::ClassHash"
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "name": "deadalus::counter::counter_factory::CounterFactory::Event",
+            "kind": "enum",
+            "variants": []
+        }
+    ]
+}

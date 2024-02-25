@@ -1,0 +1,61 @@
+{
+    "address": "null",
+    "chain_id": "<StarknetChainId.GOERLI: 1536727068981429685321>",
+    "abi": [
+        {
+            "type": "impl",
+            "name": "Counter",
+            "interface_name": "deadalus::counter::counter::ICounter"
+        },
+        {
+            "type": "interface",
+            "name": "deadalus::counter::counter::ICounter",
+            "items": [
+                {
+                    "type": "function",
+                    "name": "increment",
+                    "inputs": [],
+                    "outputs": [],
+                    "state_mutability": "external"
+                },
+                {
+                    "type": "function",
+                    "name": "decrement",
+                    "inputs": [],
+                    "outputs": [],
+                    "state_mutability": "external"
+                },
+                {
+                    "type": "function",
+                    "name": "set_owner",
+                    "inputs": [
+                        {
+                            "name": "new_owner",
+                            "type": "core::starknet::contract_address::ContractAddress"
+                        }
+                    ],
+                    "outputs": [],
+                    "state_mutability": "external"
+                },
+                {
+                    "type": "function",
+                    "name": "get_count",
+                    "inputs": [],
+                    "outputs": [],
+                    "state_mutability": "view"
+                }
+            ]
+        },
+        {
+            "type": "constructor",
+            "name": "constructor",
+            "inputs": []
+        },
+        {
+            "type": "event",
+            "name": "deadalus::counter::counter::Counter::Event",
+            "kind": "enum",
+            "variants": []
+        }
+    ]
+}
