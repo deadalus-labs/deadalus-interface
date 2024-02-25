@@ -7,9 +7,9 @@ const Counters = () => {
   return (
     <div>
       {/* <CounterConnect /> */}
-      {/* <CounterFractionalizer /> */}
+      <CounterFractionalizer />
       {/* <CounterDeposit /> */}
-      <CounterDetail />
+      {/* <CounterDetail /> */}
     </div>
   )
 }

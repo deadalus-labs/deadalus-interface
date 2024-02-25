@@ -8,6 +8,7 @@ import {
   braavos,
   publicProvider,
   useInjectedConnectors,
+  blastProvider,
   voyager,
 } from "@starknet-react/core";
 
@@ -23,7 +24,7 @@ export function StarknetProvider({ children }: { children: ReactNode }) {
 
   return (
     <StarknetConfig
-      chains={[mainnet]}
+      chains={[sepolia]}
       provider={publicProvider()}
       connectors={connectors}
       explorer={voyager}
