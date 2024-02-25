@@ -1,5 +1,5 @@
 {
-    "address": "0x4773c2ed572628b9a52ac2955d86575d2e2b9bd8c4fa9b5bc25ac02425ca621",
+    "address": "0x77b6cad578e72f59e6a9d5209b1570c3230b61f1e5692553d6ba2b5adb5821",
     "chain_id": "<StarknetChainId.GOERLI: 1536727068981429685321>",
     "abi": [
         {
@@ -43,10 +43,47 @@
             ]
         },
         {
+            "type": "struct",
+            "name": "core::integer::u256",
+            "members": [
+                {
+                    "name": "low",
+                    "type": "core::integer::u128"
+                },
+                {
+                    "name": "high",
+                    "type": "core::integer::u128"
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "name": "deadalus::counter::counter_factory::CounterFactory::CounterDeploy",
+            "kind": "struct",
+            "members": [
+                {
+                    "name": "contract",
+                    "type": "core::starknet::contract_address::ContractAddress",
+                    "kind": "key"
+                },
+                {
+                    "name": "counter_id",
+                    "type": "core::integer::u256",
+                    "kind": "data"
+                }
+            ]
+        },
+        {
             "type": "event",
             "name": "deadalus::counter::counter_factory::CounterFactory::Event",
             "kind": "enum",
-            "variants": []
+            "variants": [
+                {
+                    "name": "CounterDeploy",
+                    "type": "deadalus::counter::counter_factory::CounterFactory::CounterDeploy",
+                    "kind": "nested"
+                }
+            ]
         }
     ]
 }

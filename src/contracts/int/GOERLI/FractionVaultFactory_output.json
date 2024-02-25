@@ -1,37 +1,11 @@
 {
-    "address": "0xd528df171b1f774f915f7ed5fe76b6e7ff77f12697b789e53a8db4e340a5ab",
+    "address": "0x7436faa692de98be7765a6314d40b57c18097fe4e50043d9624ba3acd42cf58",
     "chain_id": "<StarknetChainId.GOERLI: 1536727068981429685321>",
     "abi": [
         {
             "type": "impl",
             "name": "FracationVault",
-            "interface_name": "deadalus::vault::fraction_vault_factory::IFractionVault"
-        },
-        {
-            "type": "enum",
-            "name": "deadalus::vault::fraction_vault_factory::FractionPeriod",
-            "variants": [
-                {
-                    "name": "MINUTELY",
-                    "type": "()"
-                },
-                {
-                    "name": "HOURLY",
-                    "type": "()"
-                },
-                {
-                    "name": "DAILY",
-                    "type": "()"
-                },
-                {
-                    "name": "MONTHLY",
-                    "type": "()"
-                },
-                {
-                    "name": "YEARLY",
-                    "type": "()"
-                }
-            ]
+            "interface_name": "deadalus::vault::fraction_vault::IFractionVault"
         },
         {
             "type": "enum",
@@ -49,7 +23,7 @@
         },
         {
             "type": "interface",
-            "name": "deadalus::vault::fraction_vault_factory::IFractionVault",
+            "name": "deadalus::vault::fraction_vault::IFractionVault",
             "items": [
                 {
                     "type": "function",
@@ -58,10 +32,6 @@
                         {
                             "name": "deposit_contract_address",
                             "type": "core::starknet::contract_address::ContractAddress"
-                        },
-                        {
-                            "name": "fraction_period",
-                            "type": "deadalus::vault::fraction_vault_factory::FractionPeriod"
                         }
                     ],
                     "outputs": [],
@@ -76,7 +46,7 @@
                             "type": "core::starknet::contract_address::ContractAddress"
                         },
                         {
-                            "name": "function_name",
+                            "name": "function_selector",
                             "type": "core::felt252"
                         },
                         {
@@ -137,9 +107,32 @@
         },
         {
             "type": "event",
-            "name": "deadalus::vault::fraction_vault_factory::FractionVault::Event",
+            "name": "deadalus::vault::fraction_vault::FractionVault::ContractDeposit",
+            "kind": "struct",
+            "members": [
+                {
+                    "name": "contract",
+                    "type": "core::starknet::contract_address::ContractAddress",
+                    "kind": "key"
+                },
+                {
+                    "name": "nft_contract",
+                    "type": "core::starknet::contract_address::ContractAddress",
+                    "kind": "data"
+                }
+            ]
+        },
+        {
+            "type": "event",
+            "name": "deadalus::vault::fraction_vault::FractionVault::Event",
             "kind": "enum",
-            "variants": []
+            "variants": [
+                {
+                    "name": "ContractDeposit",
+                    "type": "deadalus::vault::fraction_vault::FractionVault::ContractDeposit",
+                    "kind": "nested"
+                }
+            ]
         }
     ]
 }
