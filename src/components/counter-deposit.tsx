@@ -43,7 +43,7 @@ const CounterDeposit = () => {
 				<Table className='w-full'>
 					<TableHeader>
 						<TableRow className='hover:bg-transparent'>
-							<TableHead className='text-slate-400 text-lg rounded-t-lg flex items-center font-normal'>Your Counters <Badge className='bg-[#16A24A] ml-1'>{counters.length}</Badge></TableHead>
+							<TableHead className='text-slate-400 text-lg rounded-t-lg flex items-center font-normal'>Your Contracts <Badge className='bg-[#16A24A] ml-1'>{counters.length}</Badge></TableHead>
 						</TableRow>
 					</TableHeader>
 					<TableBody>
