@@ -7,7 +7,7 @@ import {
 	CardHeader,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import CandleStick from './icons/candle-stick';
+import CandleStickIcon from './icons/candle-stick-icon';
 import FractionalizeIcon from './icons/fractionalize-icon';
 import clsx from 'clsx';
 
@@ -20,7 +20,7 @@ const CounterFractionalizer = () => {
 			<div className='w-full flex items-center justify-between'>
 				<h1 className="text-2xl font-semibold">Fractionalize Counter</h1>
 				<Button className='bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]'>
-					<CandleStick />
+					<CandleStickIcon />
 				</Button>
 			</div>
 			<CardHeader className="flex flex-col items-center justify-center space-y-5 border-2 border-slate-800 rounded-lg">
