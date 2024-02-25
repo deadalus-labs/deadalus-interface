@@ -1,3 +1,5 @@
 export const navigation = [
-  { name: 'Home', href: '#', current: true }
+  { name: 'Deposit', href: '/counters', current: true },
+  { name: 'Fractionalizer', href: '/counters/fractionalizer' },
+  { name: 'Fractionalized', href: '/counters/fractionalized' },
 ]
