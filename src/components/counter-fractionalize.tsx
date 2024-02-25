@@ -27,7 +27,7 @@ const CounterFractionalizer = () => {
 				<p className="flex justify-center items-center w-full text-lg sm:text-xl text-white text-center">
 					Select counter access token frequency
 				</p>
-				<div className='flex justify-center space-x-5'>
+				<div className='flex justify-center space-x-2 sm:space-x-5'>
 					<Button
 						onClick={() => handleFrequencyChange('daily')}
 						className={clsx('text-base text-white px-5 border-2 border-[#16A24A]', frequency === 'daily' &&
