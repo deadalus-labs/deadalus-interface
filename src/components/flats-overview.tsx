@@ -113,45 +113,49 @@ export const DisplayFlats = () => {
     }
   }, [contract]);
   return (
-    <Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
-      <div className="w-full flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">
-          Fractionalize your real estate with Starknet
-        </h1>
-        <h2 className="text-2xl font-semibold">Fractionalized real estates:</h2>
-        <Button className="bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]">
-          <CandleStickIcon />
-        </Button>
-      </div>
-      <div className="max-h-[calc(100vh-4rem)] overflow-auto">
-        <div className="grid grid-cols-3 gap-4">
-          {events &&
-            events.events.map((flat: any, index: number) => (
-              <div key={index} className="card w-96 bg-base-100 shadow-xl">
-                <figure className="relative max-w-[300px] max-h-[200px] rounded-lg">
-                  <Image
-                    src="/property.png"
-                    alt="property image"
-                    width={300}
-                    height={200}
-                    layout="responsive"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title">Flat address</h2>
-                  <p>{shortAddress(flat.data[0])}</p>
-                  <div className="card-actions justify-end">
-                    <Link href="/counters/fractionalized">
-                      <button className="btn btn-primary">Enter</button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-        </div>
-      </div>
-      -------for debugging -------
-      <p> VaultContractAddress: {VAULT_ADDRESS}</p>
-    </Card>
-  );
+		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
+			<div className="w-full flex items-center justify-between">
+				<h1 className="text-2xl font-semibold">
+					Fractionalize your real estate with Starknet
+				</h1>
+				<Button className="bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]">
+					<CandleStickIcon />
+				</Button>
+			</div>
+			<div className="max-h-[calc(100vh-4rem)] overflow-auto">
+				<div className="grid grid-cols-3 gap-4">
+					{events &&
+						events.events.map((flat: any, index: number) => (
+							<div
+								key={index}
+								className="card w-96 bg-base-100 shadow-xl"
+							>
+								<figure className="relative max-w-[300px] max-h-[200px] rounded-lg">
+									<Image
+										src="/property.png"
+										alt="property image"
+										width={300}
+										height={200}
+										layout="responsive"
+									/>
+								</figure>
+								<div className="card-body">
+									<h2 className="card-title py-3">North Strathfield Concord West</h2>
+									<p>{shortAddress(flat.data[0])}</p>
+									<div className="card-actions justify-end py-3">
+										<Link href="/counters/fractionalized">
+											<Button className="btn btn-primary rounded-lg px-6 bg-green-600">
+												Enter
+											</Button>
+										</Link>
+									</div>
+								</div>
+							</div>
+						))}
+				</div>
+			</div>
+			-------for debugging -------
+			<p> VaultContractAddress: {VAULT_ADDRESS}</p>
+		</Card>
+	);
 };
