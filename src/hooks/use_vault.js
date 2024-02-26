@@ -22,6 +22,8 @@ function useVault(depositedContractAddress){
       address: VAULT_ADDRESS,
     });
 
+    function toggleDoor(){}
+
     	// const calls = useMemo(() => {
       //   if (!address || !contract) return [];
       //   console.log("made it")
