@@ -22,7 +22,7 @@ import { useContractRead } from "@starknet-react/core";
 const contractAddress =
   "0x049ac2b4cf4b9db9f9c222db84ec1d5ebc1408175ac9c20d1e45ca0046ecd56a";
 
-const PropertyDetail = () => {
+const PropertyDetail = (propertyAddressPassed: string) => {
   const [abi, setAbi] = useState<any>();
   const [open, setOpen] = useState(false);
   const [contract, setContract] = useState<any>();
@@ -106,7 +106,7 @@ const PropertyDetail = () => {
           <CandleStickIcon />
         </Button>
       </div>
-
+      <p>Property Address: {propertyAddressPassed}</p>
       <button
         className="btn"
         onClick={() => {

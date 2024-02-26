@@ -4,6 +4,7 @@ import { useAccount } from "@starknet-react/core";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import CandleStickIcon from "./icons/candle-stick-icon";
+import Link from "next/link";
 import {
   Account,
   RpcProvider,
@@ -17,6 +18,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import clsx from "clsx";
 import { getAbi } from "@/lib/utils";
 import { vaultContractAddress } from "@/lib/utils";
+import Image from "next/image";
 
 export const DisplayFlats = () => {
   const [frequency, setFrequency] = useState("daily");
@@ -65,37 +67,9 @@ export const DisplayFlats = () => {
     await providerGoerli.waitForTransaction(res.transaction_hash);
   };
 
-  const depositContract = async (propertyAddress: string) => {
-    if (account) {
-      const multiCall = await account.execute([
-        // 1. transfer property
-        {
-          contractAddress: propertyAddress,
-          entrypoint: "transfer_ownership",
-          calldata: CallData.compile({
-            contractAddress: propertyAddress,
-          }),
-        },
-        // 2. mint nfts
-        {
-          contractAddress: vaultContractAddress,
-          entrypoint: "deposit_contract",
-          calldata: CallData.compile({
-            contractAddress: propertyAddress,
-          }),
-        },
-        // 3. add functions
-        {
-          contractAddress: vaultContractAddress,
-          entrypoint: "add_function",
-          calldata: CallData.compile({
-            function_selector: "toogle_door",
-            require_owner: true,
-          }),
-        },
-      ]);
-      await providerGoerli.waitForTransaction(multiCall.transaction_hash);
-    }
+  const shortAddress = (address: string) => {
+    let displayAddress = address?.slice(0, 5) + "..." + address?.slice(-4);
+    return displayAddress;
   };
 
   const getEvents = async () => {
@@ -154,8 +128,32 @@ export const DisplayFlats = () => {
           <CandleStickIcon />
         </Button>
       </div>
-      <div className="card-list">
-        {/* {events && events.events.map((flat: any) => <p key={flat}> {flat}</p>)} */}
+      <div className="max-h-[calc(100vh-4rem)] overflow-auto">
+        <div className="grid grid-cols-3 gap-4">
+          {events &&
+            events.events.map((flat: any, index: number) => (
+              <div key={index} className="card w-96 bg-base-100 shadow-xl">
+                <figure className="relative max-w-[300px] max-h-[200px] rounded-lg">
+                  <Image
+                    src="/property.png"
+                    alt="property image"
+                    width={300}
+                    height={200}
+                    layout="responsive"
+                  />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title">Flat address</h2>
+                  <p>{shortAddress(flat.data[0])}</p>
+                  <div className="card-actions justify-end">
+                    <Link href="/counters/fractionalized">
+                      <button className="btn btn-primary">Enter</button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
       --------------
       <p> VaultContractAddress: {vaultContractAddress}</p>
