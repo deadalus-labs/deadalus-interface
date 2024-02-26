@@ -7,10 +7,12 @@ import CandleStickIcon from "./icons/candle-stick-icon";
 import { Account, RpcProvider, Contract, CallData, num, hash, shortString } from "starknet";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import clsx from "clsx";
-import { VAULT_ADDRESS } from "@/lib/constants/contract_address";
+import { VAULT_ADDRESS, TOOGLE_SELECTOR } from "@/lib/constants/contract_address";
 import FractionalizeIcon from "./icons/fractionalize-icon";
 import { Input } from "@/components/ui/input";
 import { Link } from "lucide-react";
+
+
 
 const Fractionalize = () => {
   const [frequency, setFrequency] = useState("daily");
@@ -67,7 +69,7 @@ const Fractionalize = () => {
           contractAddress: propertyAddress,
           entrypoint: "transfer_ownership",
           calldata: CallData.compile({
-            contractAddress: propertyAddress,
+            contractAddress: VAULT_ADDRESS, // transfer ownership to VAULT
           }),
         },
         // 2. mint nfts
@@ -83,7 +85,7 @@ const Fractionalize = () => {
           contractAddress: VAULT_ADDRESS,
           entrypoint: "add_function",
           calldata: CallData.compile({
-            function_selector: "toogle_door",
+            function_selector: TOOGLE_SELECTOR,
             require_owner: true,
           }),
         },
@@ -134,6 +136,8 @@ const Fractionalize = () => {
       setContract(newContract);
     }
   }, [abi]); // This effect runs when `abi` changes
+
+  
   return (
     <Card className="flex flex-col w-full md:w-[80%] sm:mx-auto text-white bg-[#111827A6]/65 py-5 px-5 sm:px-10 space-y-10 border-0">
       <div className="w-full flex items-center justify-between">
