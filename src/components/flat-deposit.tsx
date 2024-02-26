@@ -12,6 +12,7 @@ import FractionalizeIcon from "./icons/fractionalize-icon";
 import { Input } from "@/components/ui/input";
 import { Link } from "lucide-react";
 
+
 const Fractionalize = () => {
   const [frequency, setFrequency] = useState("daily");
   const [abi, setAbi] = useState<any>();
@@ -67,7 +68,7 @@ const Fractionalize = () => {
           contractAddress: propertyAddress,
           entrypoint: "transfer_ownership",
           calldata: CallData.compile({
-            contractAddress: propertyAddress,
+            contractAddress: VAULT_ADDRESS, // transfer ownership to VAULT
           }),
         },
         // 2. mint nfts
