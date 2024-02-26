@@ -1,5 +1,5 @@
 {
-    "address": "0x7838bb8d77bccf18a0086df1923e4de0d4818bfb128ff9b106187bbb1b0c867",
+    "address": "0x64e99cb9baf05302e0af1f9ea0512ccba07862d2b7d06fe503120e813fe6df4",
     "chain_id": "<StarknetChainId.GOERLI: 1536727068981429685321>",
     "abi": [
         {
@@ -22,6 +22,34 @@
             ]
         },
         {
+            "type": "struct",
+            "name": "deadalus::vault::fraction_vault::ContractFunction",
+            "members": [
+                {
+                    "name": "selector",
+                    "type": "core::felt252"
+                },
+                {
+                    "name": "require_owner",
+                    "type": "core::bool"
+                }
+            ]
+        },
+        {
+            "type": "struct",
+            "name": "core::integer::u256",
+            "members": [
+                {
+                    "name": "low",
+                    "type": "core::integer::u128"
+                },
+                {
+                    "name": "high",
+                    "type": "core::integer::u128"
+                }
+            ]
+        },
+        {
             "type": "interface",
             "name": "deadalus::vault::fraction_vault::IFractionVault",
             "items": [
@@ -34,7 +62,11 @@
                             "type": "core::starknet::contract_address::ContractAddress"
                         }
                     ],
-                    "outputs": [],
+                    "outputs": [
+                        {
+                            "type": "core::starknet::contract_address::ContractAddress"
+                        }
+                    ],
                     "state_mutability": "external"
                 },
                 {
@@ -87,7 +119,61 @@
                             "type": "core::starknet::contract_address::ContractAddress"
                         }
                     ],
-                    "state_mutability": "external"
+                    "state_mutability": "view"
+                },
+                {
+                    "type": "function",
+                    "name": "get_nft_address",
+                    "inputs": [
+                        {
+                            "name": "deposited_contract_address",
+                            "type": "core::starknet::contract_address::ContractAddress"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "type": "core::starknet::contract_address::ContractAddress"
+                        }
+                    ],
+                    "state_mutability": "view"
+                },
+                {
+                    "type": "function",
+                    "name": "get_function",
+                    "inputs": [
+                        {
+                            "name": "selector",
+                            "type": "core::felt252"
+                        }
+                    ],
+                    "outputs": [
+                        {
+                            "type": "deadalus::vault::fraction_vault::ContractFunction"
+                        }
+                    ],
+                    "state_mutability": "view"
+                },
+                {
+                    "type": "function",
+                    "name": "get_deposited_contracts",
+                    "inputs": [],
+                    "outputs": [
+                        {
+                            "type": "core::array::Array::<core::starknet::contract_address::ContractAddress>"
+                        }
+                    ],
+                    "state_mutability": "view"
+                },
+                {
+                    "type": "function",
+                    "name": "get_contract_id",
+                    "inputs": [],
+                    "outputs": [
+                        {
+                            "type": "core::integer::u256"
+                        }
+                    ],
+                    "state_mutability": "view"
                 }
             ]
         },

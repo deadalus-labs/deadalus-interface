@@ -1,136 +1,222 @@
 import { Abi } from "starknet";
 
 export const fractionVaultABI = [
-        {
-            "type": "impl",
-            "name": "FracationVault",
-            "interface_name": "deadalus::vault::fraction_vault::IFractionVault"
-        },
-        {
-            "type": "enum",
-            "name": "core::bool",
-            "variants": [
-                {
-                    "name": "False",
-                    "type": "()"
-                },
-                {
-                    "name": "True",
-                    "type": "()"
-                }
-            ]
-        },
-        {
-            "type": "interface",
-            "name": "deadalus::vault::fraction_vault::IFractionVault",
-            "items": [
-                {
-                    "type": "function",
-                    "name": "deposit_contract",
-                    "inputs": [
-                        {
-                            "name": "deposit_contract_address",
-                            "type": "core::starknet::contract_address::ContractAddress"
-                        }
-                    ],
-                    "outputs": [],
-                    "state_mutability": "external"
-                },
-                {
-                    "type": "function",
-                    "name": "call_function",
-                    "inputs": [
-                        {
-                            "name": "contract_address",
-                            "type": "core::starknet::contract_address::ContractAddress"
-                        },
-                        {
-                            "name": "function_selector",
-                            "type": "core::felt252"
-                        },
-                        {
-                            "name": "call_data",
-                            "type": "core::array::Array::<core::felt252>"
-                        }
-                    ],
-                    "outputs": [],
-                    "state_mutability": "external"
-                },
-                {
-                    "type": "function",
-                    "name": "add_function",
-                    "inputs": [
-                        {
-                            "name": "function_selector",
-                            "type": "core::felt252"
-                        },
-                        {
-                            "name": "require_owner",
-                            "type": "core::bool"
-                        }
-                    ],
-                    "outputs": [],
-                    "state_mutability": "external"
-                },
-                {
-                    "type": "function",
-                    "name": "get_controller",
-                    "inputs": [
-                        {
-                            "name": "deposited_contract_address",
-                            "type": "core::starknet::contract_address::ContractAddress"
-                        }
-                    ],
-                    "outputs": [
-                        {
-                            "type": "core::starknet::contract_address::ContractAddress"
-                        }
-                    ],
-                    "state_mutability": "external"
-                }
-            ]
-        },
-        {
-            "type": "constructor",
-            "name": "constructor",
-            "inputs": [
-                {
-                    "name": "time_oracle_address",
-                    "type": "core::starknet::contract_address::ContractAddress"
-                },
-                {
-                    "name": "nft_contract_class_hash",
-                    "type": "core::starknet::class_hash::ClassHash"
-                }
-            ]
-        },
-        {
-            "type": "event",
-            "name": "deadalus::vault::fraction_vault::FractionVault::ContractDeposit",
-            "kind": "struct",
-            "members": [
-                {
-                    "name": "contract",
-                    "type": "core::starknet::contract_address::ContractAddress",
-                    "kind": "key"
-                },
-                {
-                    "name": "nft_contract",
-                    "type": "core::starknet::contract_address::ContractAddress",
-                    "kind": "data"
-                }
-            ]
-        },
-        {
-            "type": "event",
-            "name": "deadalus::vault::fraction_vault::FractionVault::Event",
-            "kind": "enum",
-            "variants": [
-                {
-                    "name": "ContractDeposit",
-                    "type": "deadalus::vault::fraction_vault::FractionVault::ContractDeposit",
-                    "kind": "nested"
-                }
-            ]
-        }
-    ] satisfies Abi;
+    {
+        "type": "impl",
+        "name": "FracationVault",
+        "interface_name": "deadalus::vault::fraction_vault::IFractionVault"
+    },
+    {
+        "type": "enum",
+        "name": "core::bool",
+        "variants": [
+            {
+                "name": "False",
+                "type": "()"
+            },
+            {
+                "name": "True",
+                "type": "()"
+            }
+        ]
+    },
+    {
+        "type": "struct",
+        "name": "deadalus::vault::fraction_vault::ContractFunction",
+        "members": [
+            {
+                "name": "selector",
+                "type": "core::felt252"
+            },
+            {
+                "name": "require_owner",
+                "type": "core::bool"
+            }
+        ]
+    },
+    {
+        "type": "struct",
+        "name": "core::integer::u256",
+        "members": [
+            {
+                "name": "low",
+                "type": "core::integer::u128"
+            },
+            {
+                "name": "high",
+                "type": "core::integer::u128"
+            }
+        ]
+    },
+    {
+        "type": "interface",
+        "name": "deadalus::vault::fraction_vault::IFractionVault",
+        "items": [
+            {
+                "type": "function",
+                "name": "deposit_contract",
+                "inputs": [
+                    {
+                        "name": "deposit_contract_address",
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    }
+                ],
+                "state_mutability": "external"
+            },
+            {
+                "type": "function",
+                "name": "call_function",
+                "inputs": [
+                    {
+                        "name": "contract_address",
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    },
+                    {
+                        "name": "function_selector",
+                        "type": "core::felt252"
+                    },
+                    {
+                        "name": "call_data",
+                        "type": "core::array::Array::<core::felt252>"
+                    }
+                ],
+                "outputs": [],
+                "state_mutability": "external"
+            },
+            {
+                "type": "function",
+                "name": "add_function",
+                "inputs": [
+                    {
+                        "name": "function_selector",
+                        "type": "core::felt252"
+                    },
+                    {
+                        "name": "require_owner",
+                        "type": "core::bool"
+                    }
+                ],
+                "outputs": [],
+                "state_mutability": "external"
+            },
+            {
+                "type": "function",
+                "name": "get_controller",
+                "inputs": [
+                    {
+                        "name": "deposited_contract_address",
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    }
+                ],
+                "state_mutability": "view"
+            },
+            {
+                "type": "function",
+                "name": "get_nft_address",
+                "inputs": [
+                    {
+                        "name": "deposited_contract_address",
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "type": "core::starknet::contract_address::ContractAddress"
+                    }
+                ],
+                "state_mutability": "view"
+            },
+            {
+                "type": "function",
+                "name": "get_function",
+                "inputs": [
+                    {
+                        "name": "selector",
+                        "type": "core::felt252"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "type": "deadalus::vault::fraction_vault::ContractFunction"
+                    }
+                ],
+                "state_mutability": "view"
+            },
+            {
+                "type": "function",
+                "name": "get_deposited_contracts",
+                "inputs": [],
+                "outputs": [
+                    {
+                        "type": "core::array::Array::<core::starknet::contract_address::ContractAddress>"
+                    }
+                ],
+                "state_mutability": "view"
+            },
+            {
+                "type": "function",
+                "name": "get_contract_id",
+                "inputs": [],
+                "outputs": [
+                    {
+                        "type": "core::integer::u256"
+                    }
+                ],
+                "state_mutability": "view"
+            }
+        ]
+    },
+    {
+        "type": "constructor",
+        "name": "constructor",
+        "inputs": [
+            {
+                "name": "time_oracle_address",
+                "type": "core::starknet::contract_address::ContractAddress"
+            },
+            {
+                "name": "nft_contract_class_hash",
+                "type": "core::starknet::class_hash::ClassHash"
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "deadalus::vault::fraction_vault::FractionVault::ContractDeposit",
+        "kind": "struct",
+        "members": [
+            {
+                "name": "contract",
+                "type": "core::starknet::contract_address::ContractAddress",
+                "kind": "key"
+            },
+            {
+                "name": "nft_contract",
+                "type": "core::starknet::contract_address::ContractAddress",
+                "kind": "data"
+            }
+        ]
+    },
+    {
+        "type": "event",
+        "name": "deadalus::vault::fraction_vault::FractionVault::Event",
+        "kind": "enum",
+        "variants": [
+            {
+                "name": "ContractDeposit",
+                "type": "deadalus::vault::fraction_vault::FractionVault::ContractDeposit",
+                "kind": "nested"
+            }
+        ]
+    }
+] satisfies Abi;
