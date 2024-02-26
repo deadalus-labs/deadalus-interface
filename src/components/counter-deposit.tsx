@@ -29,11 +29,14 @@ import {
 } from "@starknet-react/core";
 import { fractionVaultABI } from "@/lib/constants/fraction_vault";
 
+import { VAULT_ADDRESS } from "@/lib/constants/contract_address";
+
+
 const CounterDeposit = () => {
 	const { address } = useAccount();
 	const { contract } = useContract({
 		abi: fractionVaultABI,
-		address: "0x7838bb8d77bccf18a0086df1923e4de0d4818bfb128ff9b106187bbb1b0c867",
+		address: VAULT_ADDRESS,
 	});
 
 	const calls = useMemo(() => {
