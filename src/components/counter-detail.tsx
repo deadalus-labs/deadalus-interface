@@ -10,6 +10,9 @@ import CandleStickIcon from './icons/candle-stick-icon';
 import Image from 'next/image';
 import FractionalNFTDisplay from './fractional-nft-display';
 
+import useController from '@/hooks/use_controller';
+
+
 const CounterDetail = () => {
 	const [open, setOpen] = useState(false);
 
@@ -21,6 +24,7 @@ const CounterDetail = () => {
 		setOpen(false);
 	}
 
+	const { currentController } = useController()
 	
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
