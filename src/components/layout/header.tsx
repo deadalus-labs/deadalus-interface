@@ -49,7 +49,7 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 									</div>
 								</div>
 								<div className="hidden sm:ml-6 sm:flex sm:items-center">
-									<ConnectWallet />
+									<ConnectWallet size="sm" />
 								</div>
 								<div className="-mr-2 flex items-center sm:hidden">
 									{/* Mobile menu button */}
@@ -91,8 +91,8 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 									</Disclosure.Button>
 								))}
 							</div>
-							<div className="border-t border-gray-200 pb-3 pt-4">
-								<ConnectWallet />
+							<div className="border-t border-gray-200 pb-3 pt-4 ml-4">
+								<ConnectWallet size="sm" />
 							</div>
 						</Disclosure.Panel>
 					</>

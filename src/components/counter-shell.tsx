@@ -24,7 +24,7 @@ const CounterConnect = () => {
 		<Card className="flex flex-col lg:w-1/2 mx-auto bg-[#111827] p-5 space-y-6 border-0">
 			<CardHeader className="flex justify-center border-2 border-slate-800 rounded-lg">
 				<div className="flex justify-center items-center w-full">
-					<ConnectWallet />
+					<ConnectWallet size={"lg"} />
 				</div>
 			</CardHeader>
 			<CardFooter className="flex justify-between border-2 border-slate-800 rounded-lg pt-6 text-slate-300 text-base space-x-2.5">

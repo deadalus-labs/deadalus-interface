@@ -10,10 +10,10 @@ const DisconnectModal = dynamic(() => import("./disconnect-modal"), {
 	ssr: false,
 });
 
-export default function ConnectWallet() {
+export default function ConnectWallet({ size }: { size: "sm" | "lg" }) {
 	const { address } = useAccount();
 
 	return (
-		<div className="">{address ? <DisconnectModal /> : <ConnectModal />}</div>
+		<div className="">{address ? <DisconnectModal /> : <ConnectModal size={size} />}</div>
 	);
 }
