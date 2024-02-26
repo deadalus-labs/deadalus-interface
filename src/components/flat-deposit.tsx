@@ -7,10 +7,11 @@ import CandleStickIcon from "./icons/candle-stick-icon";
 import { Account, RpcProvider, Contract, CallData, num, hash } from "starknet";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import clsx from "clsx";
-import { VAULT_ADDRESS } from "@/lib/constants/contract_address";
+import { VAULT_ADDRESS, TOOGLE_SELECTOR } from "@/lib/constants/contract_address";
 import FractionalizeIcon from "./icons/fractionalize-icon";
 import { Input } from "@/components/ui/input";
 import { Link } from "lucide-react";
+
 
 
 const Fractionalize = () => {
@@ -84,7 +85,7 @@ const Fractionalize = () => {
           contractAddress: VAULT_ADDRESS,
           entrypoint: "add_function",
           calldata: CallData.compile({
-            function_selector: "toogle_door",
+            function_selector: TOOGLE_SELECTOR,
             require_owner: true,
           }),
         },
