@@ -1,6 +1,6 @@
 "use client"
-
-import React, { useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import React from 'react'
 import {
 	Card,
 	CardContent,
@@ -15,7 +15,10 @@ import useVault from '@/hooks/use_vault';
 
 const CounterDetail = () => {
 
-	const { currentController, hasControl, writeAsync, doorOpen, propertyAddress } = useVault("0x012078247dbb73de4d76ceabea0a1962bf8ee34d9691d05c8c07aacd5523354a")
+	const searchParams = useSearchParams()
+	const contract = searchParams.get("contract")
+
+	const { currentController, hasControl, writeAsync, doorOpen, propertyAddress } = useVault(contract)
 
 	const openFunction = () => {
 		if (doorOpen == true){
@@ -29,6 +32,8 @@ const CounterDetail = () => {
 		}
 		writeAsync();
 	}
+
+	
 
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">

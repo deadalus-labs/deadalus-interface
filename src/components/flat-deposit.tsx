@@ -130,6 +130,8 @@ const Fractionalize = () => {
       setContract(newContract);
     }
   }, [abi]); // This effect runs when `abi` changes
+
+  
   return (
     <Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
       <div className="w-full flex items-center justify-between">
