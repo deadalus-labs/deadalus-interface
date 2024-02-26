@@ -14,17 +14,22 @@ import useVault from '@/hooks/use_vault';
 
 
 const CounterDetail = () => {
-	const [open, setOpen] = useState(false);
+
+	const { currentController, hasControl, writeAsync, doorOpen } = useVault("0x07a6a17706eae52c01c1ab4e92bdf5f5bf70c5fac4e67f700c5b5fb287c40e9a")
+
 	const openFunction = () => {
-		setOpen(true);
-		toggleDoor();
+		if (doorOpen == true){
+			return;
+		}
+		writeAsync();
 	}
 	const closeFunction = () => {
-		setOpen(false);
-		toggleDoor();
+		if (doorOpen == false){
+			return;
+		}
+		writeAsync();
 	}
 
-	const { currentController, toggleDoor } = useVault("0x07a6a17706eae52c01c1ab4e92bdf5f5bf70c5fac4e67f700c5b5fb287c40e9a")
 
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
@@ -42,7 +47,7 @@ const CounterDetail = () => {
 								<Image src='/property.png' alt='property image' width={300} height={200} />
 							</div>
 							<div className='border-2 border-slate-800 rounded-lg w-72 p-3.5 text-center'>
-								<p>{open ? "Door Opened" : "Door Closed"}</p>
+								<p>{doorOpen ? "Door Opened" : "Door Closed"}</p>
 							</div>
 							<div className='flex space-x-5 items-center w-72 justify-between'>
 								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={openFunction}>Open Door</Button>
@@ -57,7 +62,12 @@ const CounterDetail = () => {
 						</div>
 					</div>
 					<div className='h-fit border-2 border-slate-800 rounded-lg text-center p-5'>
-						<p className='text-slate-300 text-lg'>You currently don{"’"}t have permission to call Deadalus property contract.</p>
+						{
+							hasControl ?
+							<p className='text-slate-300 text-lg'>You have control!</p>
+							:
+							<p className='text-slate-300 text-lg'>You currently don{"’"}t have permission to call Deadalus property contract.</p>
+						}
 					</div>
 				</div>
 				<FractionalNFTDisplay />
