@@ -141,7 +141,7 @@ export const DisplayFlats = () => {
                   <h2 className="card-title">Flat address</h2>
                   <p>{shortAddress(flat.data[0])}</p>
                   <div className="card-actions justify-end">
-                    <Link href="/counters/fractionalized">
+                    <Link href={`/counters/fractionalized?contract=${flat.data[0]}`}>
                       <button className="btn btn-primary">Enter</button>
                     </Link>
                   </div>
