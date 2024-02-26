@@ -4,7 +4,7 @@ import { useAccount } from "@starknet-react/core";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import CandleStickIcon from "./icons/candle-stick-icon";
-import { Account, RpcProvider, Contract, CallData, num, hash } from "starknet";
+import { Account, RpcProvider, Contract, CallData, num, hash, shortString } from "starknet";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import clsx from "clsx";
 import { VAULT_ADDRESS } from "@/lib/constants/contract_address";
@@ -110,6 +110,11 @@ const Fractionalize = () => {
     return eventsList;
   };
 
+  const shortAddress = (address: string) => {
+    let displayAddress = address?.slice(0, 5) + "..." + address?.slice(-4);
+    return displayAddress;
+  };
+
   // Load ABI on component mount
   useEffect(() => {
     const getAbi = async () => {
@@ -130,91 +135,95 @@ const Fractionalize = () => {
     }
   }, [abi]); // This effect runs when `abi` changes
   return (
-		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
-			<div className="w-full flex items-center justify-between">
-				<h1 className="text-2xl font-semibold">
-					Fractionalize your real estate
-				</h1>
-				<Button className="bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]">
-					<CandleStickIcon />
-				</Button>
-			</div>
-			<CardHeader className="flex flex-col items-center justify-center space-y-5 border-2 border-slate-800 rounded-lg">
-				<h2 className="text-1xl font-semibold">
-					Enter your real estate address:{" "}
-				</h2>
-				<div className="flex flex-col items-center justify-center w-full space-y-8">
-					<div className="flex flex-col items-center justify-center space-y-1 w-2/3">
-						<Input
-							type="text"
-							value={propertyAddress}
-							onChange={(event) =>
-								setPropertyAddress(event.target.value as string)
-							}
-							placeholder="Deposit Cairo Contract"
-							className="w-full bg-transparent px-5 py-7 border-slate-800 focus-visible:ring-offset-0 focus-visible:ring-0"
-						/>
-					</div>
-				</div>
-				<p className="flex justify-center items-center w-full text-lg sm:text-xl text-white text-center">
-					Select counter access token frequency
-				</p>
-				<div className="flex justify-center space-x-2 sm:space-x-5">
-					<Button
-						onClick={() => handleFrequencyChange("daily")}
-						className={clsx(
-							"text-base text-white px-5 border-2 border-[#16A24A]",
-							frequency === "daily" &&
-								"bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
-						)}
-					>
-						Daily
-					</Button>
-					<Button
-						onClick={() => handleFrequencyChange("weekly")}
-						className={clsx(
-							"text-base text-white px-5 border-2 border-[#16A24A]",
-							frequency === "weekly" &&
-								"bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
-						)}
-					>
-						Weekly
-					</Button>
-					<Button
-						onClick={() => handleFrequencyChange("monthly")}
-						className={clsx(
-							"text-base text-white px-5 border-2 border-[#16A24A]",
-							frequency === "monthly" &&
-								"bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
-						)}
-					>
-						Monthly
-					</Button>
-				</div>
-			</CardHeader>
-			<div className="flex">
-				<Button
-					className="bg-[#16A24A] hover:bg-[#16A24A] w-2/3 focus:bg-[#16A24A] flex justify-center items-center h-14 w-full"
-					onClick={() => depositContract(propertyAddress)}
-				>
-					<div className="flex flex-row justify-center items-center space-x-0.5">
-						<FractionalizeIcon />
-						<p className="mt-0.5 text-lg sm:text-xl font-normal">Deposit</p>
-					</div>
-				</Button>
-				<div>
-					{/* <p>status: {isPending && <div>Submitting...</div>}</p>
+    <Card className="flex flex-col w-full md:w-[80%] sm:mx-auto text-white bg-[#111827A6]/65 py-5 px-5 sm:px-10 space-y-10 border-0">
+      <div className="w-full flex items-center justify-between">
+        <h1 className="text-2xl font-semibold">
+          Fractionalize your real estate
+        </h1>
+        <Button className="bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]">
+          <CandleStickIcon />
+        </Button>
+      </div>
+      <CardHeader className="flex flex-col items-center justify-center space-y-5 border-2 border-slate-800 rounded-lg">
+        <h2 className="text-1xl font-semibold">
+          Enter your real estate address:{" "}
+        </h2>
+        <div className="flex flex-col items-center justify-center w-full space-y-8">
+          <div className="flex flex-col items-center justify-center space-y-1 w-[55%]">
+            <Input
+              type="text"
+              value={propertyAddress}
+              onChange={(event) =>
+                setPropertyAddress(event.target.value as string)
+              }
+              placeholder="Deposit Cairo Contract"
+              className="w-full bg-transparent px-5 py-7 border-slate-800 focus-visible:ring-offset-0 focus-visible:ring-0"
+            />
+          </div>
+        </div>
+        <p className="flex justify-center items-center w-full text-lg sm:text-xl text-white text-center">
+          Select counter access token frequency
+        </p>
+        <div className="flex space-x-2 justify-center sm:space-x-5">
+          <Button
+            onClick={() => handleFrequencyChange("daily")}
+            className={clsx(
+              "text-base text-white px-5 sm:px-10 border-2 border-[#16A24A]",
+              frequency === "daily" &&
+              "bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
+            )}
+          >
+            Daily
+          </Button>
+          <Button
+            onClick={() => handleFrequencyChange("weekly")}
+            className={clsx(
+              "text-base text-white px-5 sm:px-10 border-2 border-[#16A24A]",
+              frequency === "weekly" &&
+              "bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
+            )}
+          >
+            Weekly
+          </Button>
+          <Button
+            onClick={() => handleFrequencyChange("monthly")}
+            className={clsx(
+              "text-base text-white px-5 sm:px-10 border-2 border-[#16A24A]",
+              frequency === "monthly" &&
+              "bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
+            )}
+          >
+            Monthly
+          </Button>
+        </div>
+      </CardHeader>
+      <CardContent className="flex justify-center border-2 border-slate-800 rounded-lg pt-6 text-slate-300 text-lg sm:text-xl">
+        You are creating <span className="font-bold ml-1 text-white">{frequency === 'daily' ? "365" : frequency === 'weekly' ?
+          "52" : "12"} tokens</span>
+      </CardContent>
+      <div className="flex">
+        <Button
+          className="bg-[#16A24A] hover:bg-[#16A24A] w-2/3 focus:bg-[#16A24A] flex justify-center items-center h-14 w-full"
+          onClick={() => depositContract(propertyAddress)}
+        >
+          <div className="flex flex-row justify-center items-center space-x-0.5">
+            <FractionalizeIcon />
+            <p className="mt-0.5 text-lg sm:text-xl font-normal">Deposit</p>
+          </div>
+        </Button>
+        <div>
+          {/* <p>status: {isPending && <div>Submitting...</div>}</p>
           <p>hash: {data?.transaction_hash}</p> */}
-				</div>
-			</div>
-			<button className="btn btn-primary">
-				Go the fractionalized contract - disable when contract is not deployed
-				yet
-			</button>
-			-------------- For debugging --------
-			<p> VaultContractAddress: {VAULT_ADDRESS}</p>
-		</Card>
-	);
+        </div>
+      </div>
+      <button className="btn btn-primary">
+        Go the fractionalized contract - disable when contract is not deployed
+        yet
+      </button>
+      -------------- For debugging --------
+      <p> VaultContractAddress: {shortAddress(VAULT_ADDRESS)}</p>
+    </Card>
+  );
 };
 
 export default Fractionalize;
