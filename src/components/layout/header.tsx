@@ -5,6 +5,7 @@ import { X, Menu } from "lucide-react";
 import ConnectWallet from "@/components/layout/connect";
 import { navigation } from "@/lib/constants/misc";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const Header = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -32,7 +33,7 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 									</div> */}
 									<div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
 										{navigation.map((item) => (
-											<a
+											<Link
 												key={item.name}
 												href={item.href}
 												className={cn(
@@ -44,7 +45,7 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 												aria-current={item.current ? "page" : undefined}
 											>
 												{item.name}
-											</a>
+											</Link>
 										))}
 									</div>
 								</div>

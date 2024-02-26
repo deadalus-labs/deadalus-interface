@@ -52,7 +52,8 @@ const CounterFractionalizer = () => {
 				</div>
 			</CardHeader>
 			<CardContent className="flex justify-center border-2 border-slate-800 rounded-lg pt-6 text-slate-300 text-lg sm:text-xl">
-				You are creating <span className="font-bold ml-1 text-white">365 tokens</span>
+				You are creating <span className="font-bold ml-1 text-white">{frequency === 'daily' ? "365" : frequency === 'weekly' ?
+					"52" : "12"} tokens</span>
 			</CardContent>
 			<Button className="bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A] flex justify-center items-center h-14">
 				<div className='flex flex-row justify-center items-center space-x-0.5'>

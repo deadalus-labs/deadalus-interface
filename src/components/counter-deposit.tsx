@@ -28,6 +28,7 @@ import {
 	useWaitForTransaction,
 } from "@starknet-react/core";
 import { fractionVaultABI } from "@/lib/constants/fraction_vault";
+import { truncateCenter } from "@/lib/utils";
 
 const CounterDeposit = () => {
 	const { address } = useAccount();
@@ -72,7 +73,7 @@ const CounterDeposit = () => {
 						</Button>
 						<div>
 							<p>status: {isPending && <div>Submitting...</div>}</p>
-							<p>hash: {data?.transaction_hash}</p>
+							<p>hash: {truncateCenter(data?.transaction_hash || "")}</p>
 						</div>
 					</div>
 				</div>
