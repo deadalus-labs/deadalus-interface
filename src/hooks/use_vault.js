@@ -20,6 +20,7 @@ function useVault(depositedContractAddress){
     const [ currentController, setCurrentController] = useState('')
     const [ hasControl, setHasControl ] = useState(false)
     const [ doorOpen, setDoorOpen] = useState(false)
+    const [ propertyAddress, setPropertyAddress ] = useState('1234 Starknet Lane')
 
     const { contract } = useContract({
       abi: fractionVaultABI,
@@ -34,7 +35,6 @@ function useVault(depositedContractAddress){
     async function getController(){
       let currentController = await contract.call("get_controller", [depositedContractAddress])
       currentController = currentController.toString(16)
-      console.log(currentController)
       setCurrentController(currentController)
       if (address == currentController){
         setHasControl(true)
@@ -47,9 +47,17 @@ function useVault(depositedContractAddress){
       setDoorOpen(doorState)
     }
 
+    // async function getAddress(){
+    //   console.log("adsf")
+    //   let propertyAddress = await vaultContract.call("get_property_address", [])
+    //   console.log(propertyAddress)
+    //   setPropertyAddress(propertyAddress)
+    // }
+
     useEffect(() => {
       getController()
       getDoorState()
+      // getAddress()
       return () => {
         ''
       }
@@ -65,7 +73,7 @@ function useVault(depositedContractAddress){
       calls,
     });
 
-    return { currentController, hasControl, writeAsync, doorOpen }
+    return { currentController, hasControl, writeAsync, doorOpen, propertyAddress }
 }
 
 export default useVault

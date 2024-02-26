@@ -72,6 +72,17 @@ export const flatABI = [
                 ],
                 "outputs": [],
                 "state_mutability": "external"
+            },
+            {
+                "type": "function",
+                "name": "get_property_address",
+                "inputs": [],
+                "outputs": [
+                    {
+                        "type": "core::felt252"
+                    }
+                ],
+                "state_mutability": "view"
             }
         ]
     },
