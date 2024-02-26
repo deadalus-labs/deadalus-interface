@@ -10,22 +10,22 @@ import CandleStickIcon from './icons/candle-stick-icon';
 import Image from 'next/image';
 import FractionalNFTDisplay from './fractional-nft-display';
 
-import useController from '@/hooks/use_controller';
+import useVault from '@/hooks/use_vault';
 
 
 const CounterDetail = () => {
 	const [open, setOpen] = useState(false);
-
 	const openFunction = () => {
 		setOpen(true);
+		toggleDoor();
 	}
-
 	const closeFunction = () => {
 		setOpen(false);
+		toggleDoor();
 	}
 
-	const { currentController } = useController()
-	
+	const { currentController, toggleDoor } = useVault("0x07a6a17706eae52c01c1ab4e92bdf5f5bf70c5fac4e67f700c5b5fb287c40e9a")
+
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
 			<div className='w-full flex items-center justify-between'>
@@ -50,6 +50,9 @@ const CounterDetail = () => {
 							</div>
 							<div>
 								<p className='text-base sm:text-2xl font-normal'>Apartment Location</p>
+							</div>
+							<div>
+								<p className='text-base font-normal'>Current Controller {currentController}</p>
 							</div>
 						</div>
 					</div>
