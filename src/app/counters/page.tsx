@@ -1,3 +1,5 @@
+"use client"
+
 import CounterConnect from "@/components/counter-shell"
 import CounterDeposit from "@/components/counter-deposit"
 
