@@ -18,18 +18,18 @@ const Header = ({ children }: { children: React.ReactNode }) => {
 						<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 							<div className="flex h-16 justify-between">
 								<div className="flex">
-									{/* <div className="flex flex-shrink-0 items-center">
+									<div className="flex flex-shrink-0 items-center">
 										<img
 											className="block h-8 w-auto lg:hidden"
-											src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-											alt="Starknet UI Starterkit"
+											src="/bg-deadalus-logo.png"
+											alt="Deadalus Logo"
 										/>
 										<img
 											className="hidden h-8 w-auto lg:block"
-											src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-											alt="Starknet UI Starterkit"
+											src="/bg-deadalus-logo.png"
+											alt="Deadalus Logo"
 										/>
-									</div> */}
+									</div>
 									<div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
 										{navigation.map((item) => (
 											<a
