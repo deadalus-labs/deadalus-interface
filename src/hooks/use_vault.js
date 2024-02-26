@@ -65,7 +65,14 @@ function useVault(depositedContractAddress){
 
     const calls = useMemo(() => {
       if (!depositedContractAddress|| !contract) return [];
-      // return contract.populateTransaction["call_function"]([depositedContractAddress, TOOGLE_SELECTOR]);
+      return contract.populate("call_function", {
+        contract_address: depositedContractAddress,
+        function_selector: TOOGLE_SELECTOR,
+        call_data: []
+      })
+      
+      
+      // Transaction["call_function"]([depositedContractAddress, TOOGLE_SELECTOR, []]); depositedContractAddress, TOOGLE_SELECTOR, ['']
       
     }, [contract, address])
 
