@@ -118,7 +118,6 @@ export const DisplayFlats = () => {
         <h1 className="text-2xl font-semibold">
           Fractionalize your real estate with Starknet
         </h1>
-        <h2 className="text-2xl font-semibold">Fractionalized real estates:</h2>
         <Button className="bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]">
           <CandleStickIcon />
         </Button>
