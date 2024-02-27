@@ -88,20 +88,18 @@ export const DisplayFlats = () => {
       </div>
       {
         events.events.length > 0 ?
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:min-w-[700px] lg:min-h-[900px]">
-            {
-              events.events.map((flat: any, index: number) => (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {events.events.map((flat: any, index: number) => (
                 <div
                   key={index}
-                  className="card max-w-[375px] bg-base-100 shadow-xl border-2 border-[#D9D9D9]/30 rounded-2xl overflow-hidden"
+                  className="card max-w-[375px] w-full bg-base-100 shadow-xl border-2 border-[#D9D9D9]/30 rounded-2xl overflow-hidden"
                 >
-                  <figure className="relative w-[375xpx] h-[200px] overflow-hidden rounded-t-2xl">
+                  <figure className="relative w-full h-[200px] overflow-hidden rounded-t-2xl">
                     <Image
                       src={`/${images[index]}`}
                       alt="property image"
                       layout="fill"
                       objectFit="cover"
-
                     />
                   </figure>
                   <div className="card-body px-3.5">
@@ -116,10 +114,8 @@ export const DisplayFlats = () => {
                     </div>
                   </div>
                 </div>
-              )
-              )
-            }
-          </div>
+              ))}
+            </div>
           :
           <div className="flex justify-center items-center bg-gray-800 w-full min-w-[700px] min-h-[900px]">
             <SwishSpinner size={100} color="#ffffff" />
