@@ -17,6 +17,8 @@ import { SwishSpinner } from "react-spinners-kit";
 
 import { shortAddress } from "@/lib/utils";
 
+import { images } from "@/lib/constants/images";
+import { propertyNames } from "@/lib/constants/property_names";
 
 
 export const DisplayFlats = () => {
@@ -91,22 +93,22 @@ export const DisplayFlats = () => {
                         events.events.map((flat: any, index: number) => (
                           <div
                           key={index}
-                          className="card max-w-[400px] bg-base-100 shadow-xl border-2 border-[#D9D9D9]/30 rounded-2xl"
+                          className="card max-w-[400px] bg-base-100 shadow-xl border-2 border-[#D9D9D9]/30 rounded-2xl overflow-hidden"
                         >
-                          <figure className="relative max-w-[400px] max-h-[200px] rounded-t-2xl">
-                            <Image
-                              src="/property-1.png"
-                              alt="property image"
-                              width={400}
-                              height={200}
-                              layout="responsive"
-                            />
-                          </figure>
+                            <figure className="relative w-[400px] h-[200px] overflow-hidden rounded-t-2xl">
+                                <Image
+                                    src={`/${images[index]}`}
+                                    alt="property image"
+                                    layout="fill"
+                                    objectFit="cover"
+                                    
+                                />
+                            </figure>
                             <div className="card-body px-3.5">
-                              <h2 className="card-title py-3">North Strathfield Concord West</h2>
+                              <h2 className="card-title py-3">{propertyNames[index]}</h2>
                               <p>{shortAddress(flat.data[0])}</p>
                               <div className="card-actions justify-end py-3">
-                                <Link href={`/counters/fractionalized?contract=${flat.data[0]}`}>
+                                <Link href={`/counters/fractionalized?contract=${flat.data[0]}&id=${index}`}>
                                   <Button className="btn btn-primary rounded-lg px-6 bg-green-600 hover:bg-green-600 focus:bg-green-600">
                                     Enter
                                   </Button>

@@ -43,7 +43,6 @@ const Fractionalize = () => {
 	const getAbi = async (provider: any, contractAddress: string) => {
 		const { abi: contractAbi } = await provider.getClassAt(contractAddress);
 		setAbi(contractAbi);
-		console.log("ABI", contractAbi);
 	};
 
 	const getOwner = async (propertyContract: any) => {
@@ -57,7 +56,6 @@ const Fractionalize = () => {
 		provider: any
 	) => {
 		const contract = new Contract(abi, contractAddress, provider);
-		console.log(contract);
 		setContract(contract);
 	};
 
