@@ -25,7 +25,7 @@ const CounterFractionalizer = () => {
 			</div>
 			<CardHeader className="flex flex-col items-center justify-center space-y-5 border-2 border-slate-800 rounded-lg">
 				<p className="flex justify-center items-center w-full text-lg sm:text-xl text-white text-center">
-					Select counter access token frequency
+					Select token access frequency
 				</p>
 				<div className='flex justify-center space-x-2 sm:space-x-5'>
 					<Button

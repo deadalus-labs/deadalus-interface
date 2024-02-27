@@ -165,7 +165,7 @@ const Fractionalize = () => {
         </div>
         <CardHeader className="flex flex-col items-center justify-center space-y-5 border-2 border-slate-800 rounded-lg">
           <h2 className="text-1xl font-semibold">
-            Enter your real estate address:{" "}
+            Enter your real estate address below{" "}
           </h2>
           <div className="flex flex-col items-center justify-center w-full space-y-8">
             <div className="flex flex-col items-center justify-center space-y-1 w-[55%]">
@@ -181,7 +181,7 @@ const Fractionalize = () => {
             </div>
           </div>
           <p className="flex justify-center items-center w-full text-lg sm:text-xl text-white text-center">
-            Select counter access token frequency
+            Select token access frequency
           </p>
           <div className="flex space-x-2 justify-center sm:space-x-5">
             <Button
@@ -249,7 +249,7 @@ const Fractionalize = () => {
         </button> */}
 
         {enableLinkProperty && (
-          <Link href={`/counters/fractionalized?contract=${propertyAddress}`}>
+          <Link href={`/deposit/fractionalized?contract=${propertyAddress}`}>
             <Button className="btn btn-primary rounded-lg px-6 text-white bg-green-600 hover:bg-green-600 focus:bg-green-600">
               Go to property
             </Button>
