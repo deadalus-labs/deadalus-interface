@@ -1,24 +1,26 @@
-"use client"
-import { useSearchParams } from 'next/navigation'
-import React from 'react'
-import {
-	Card,
-	CardContent,
-} from "@/components/ui/card";
+"use client";
+import { useSearchParams } from "next/navigation";
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import CandleStickIcon from './icons/candle-stick-icon';
-import Image from 'next/image';
+import CandleStickIcon from "./icons/candle-stick-icon";
+import Image from "next/image";
 // import FractionalNFTDisplay from './fractional-nft-display';
 
-import useVault from '@/hooks/use_vault';
-import { DisplayNFTs } from './nft-display';
-
+import useVault from "@/hooks/use_vault";
+import { DisplayNFTs } from "./nft-display";
 
 const CounterDetail = () => {
-
-	const searchParams = useSearchParams()
-	const contract = searchParams.get("contract")
-	const { currentController, hasControl, writeAsync, doorOpen, propertyAddress } = useVault(contract)
+	const searchParams = useSearchParams();
+	const contract = searchParams.get("contract");
+	const {
+		currentController,
+		hasControl,
+		writeAsync,
+		doorOpen,
+		propertyAddress,
+		depositedContractAddress,
+	} = useVault(contract);
 
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
@@ -48,7 +50,11 @@ const CounterDetail = () => {
 							</div>
 							<div className="flex space-x-5 items-center w-72 justify-between">
 								<Button
-									className={`bg-transparent ${hasControl ? "hover:bg-[#16A24A] focus:bg-[#16A24A] border-[#16A24A]" : "hover:bg-[#EF4444] focus:bg-[#EF4444] border-[#EF4444]"} flex-1 border-2 text-base`}
+									className={`bg-transparent ${
+										hasControl
+											? "hover:bg-[#16A24A] focus:bg-[#16A24A] border-[#16A24A]"
+											: "hover:bg-[#EF4444] focus:bg-[#EF4444] border-[#EF4444]"
+									} flex-1 border-2 text-base`}
 									onClick={() => writeAsync()}
 									disabled={!hasControl}
 								>
@@ -78,10 +84,10 @@ const CounterDetail = () => {
 						)}
 					</div>
 				</div>
-				<DisplayNFTs />
+				<DisplayNFTs propertyAddress={depositedContractAddress} />
 			</CardContent>
 		</Card>
 	);
-}
+};
 
 export default CounterDetail;
