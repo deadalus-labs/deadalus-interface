@@ -139,7 +139,9 @@ export const DisplayFlats = () => {
                 />
               </figure>
               <div className="card-body px-3.5">
-                <h2 className="card-title py-3">North Strathfield Concord West</h2>
+                <h2 className="card-title py-3">
+                  North Strathfield Concord West
+                </h2>
                 <p>{shortAddress(flat.data[0])}</p>
                 <div className="card-actions justify-end py-3">
                   <Link href="/counters/fractionalized">
@@ -152,13 +154,8 @@ export const DisplayFlats = () => {
             </div>
           ))}
       </div>
-<<<<<<< HEAD
-      -------for debugging -------
-      <p> VaultContractAddress: {shortAddress(VAULT_ADDRESS)}</p>
-=======
       {/* -------for debugging -------
       <p> VaultContractAddress: {VAULT_ADDRESS}</p> */}
->>>>>>> origin/develop_philip
     </Card>
   );
 };
