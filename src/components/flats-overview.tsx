@@ -144,7 +144,9 @@ export const DisplayFlats = () => {
                 </h2>
                 <p>{shortAddress(flat.data[0])}</p>
                 <div className="card-actions justify-end py-3">
-                  <Link href="/counters/fractionalized">
+                  <Link
+                    href={`/counters/fractionalized?contract=${flat.data[0]}`}
+                  >
                     <Button className="btn btn-primary rounded-lg px-6 bg-green-600 hover:bg-green-600 focus:bg-green-600">
                       Enter
                     </Button>
@@ -154,8 +156,8 @@ export const DisplayFlats = () => {
             </div>
           ))}
       </div>
-      {/* -------for debugging -------
-      <p> VaultContractAddress: {VAULT_ADDRESS}</p> */}
+      -------for debugging -------
+      <p> VaultContractAddress: {shortAddress(VAULT_ADDRESS)}</p>
     </Card>
   );
 };

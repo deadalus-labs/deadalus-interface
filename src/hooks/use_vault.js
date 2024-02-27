@@ -1,88 +1,102 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from "react";
 
 import {
-	useAccount,
-	useContract,
-	useContractWrite,
-	useNetwork,
-	useWaitForTransaction,
-  useContractRead
+  useAccount,
+  useContract,
+  useContractWrite,
+  useNetwork,
+  useWaitForTransaction,
+  useContractRead,
 } from "@starknet-react/core";
 
 import { fractionVaultABI } from "@/lib/constants/fraction_vault";
 import { flatABI } from "@/lib/constants/flat";
-import { VAULT_ADDRESS, TOOGLE_SELECTOR } from "@/lib/constants/contract_address";
+import {
+  VAULT_ADDRESS,
+  TOOGLE_SELECTOR,
+} from "@/lib/constants/contract_address";
 
+function useVault(depositedContractAddress) {
+  const { address } = useAccount();
 
+  const [currentController, setCurrentController] = useState("");
+  const [hasControl, setHasControl] = useState(false);
+  const [doorOpen, setDoorOpen] = useState(false);
+  const [propertyAddress, setPropertyAddress] = useState("1234 Starknet Lane");
 
-function useVault(depositedContractAddress){
-    const { address } = useAccount();
+  const { contract } = useContract({
+    abi: fractionVaultABI,
+    address: VAULT_ADDRESS,
+  });
 
-    const [ currentController, setCurrentController] = useState('')
-    const [ hasControl, setHasControl ] = useState(false)
-    const [ doorOpen, setDoorOpen] = useState(false)
-    const [ propertyAddress, setPropertyAddress ] = useState('1234 Starknet Lane')
+  const { contract: flatContract } = useContract({
+    abi: flatABI,
+    address: depositedContractAddress,
+  });
 
-    const { contract } = useContract({
-      abi: fractionVaultABI,
-      address: VAULT_ADDRESS,
-    });
+  async function getController() {
+    let currentController = await contract.call("get_controller", [
+      depositedContractAddress,
+    ]);
+    currentController = `0x${currentController.toString(16)}`;
+    setCurrentController(currentController);
+    if (address == currentController) {
+      setHasControl(true);
+    } else {
+      setHasControl(false);
+    }
+  }
 
-    const { contract: vaultContract } = useContract({
-      abi: flatABI,
-      address: depositedContractAddress 
-    })
+  async function getDoorState() {
+    let doorState = await flatContract.call("get_door_state", []);
+    setDoorOpen(doorState);
+  }
 
-    async function getController(){
-      let currentController = await contract.call("get_controller", [depositedContractAddress])
-      currentController = `0x${currentController.toString(16)}`
-      setCurrentController(currentController)
-      if (address == currentController){
-        setHasControl(true)
-      } else{
-        setHasControl(false)
+  useEffect(() => {
+    const fetchControllerData = () => {
+      if (address && contract && flatContract) {
+        getController();
+        getDoorState();
       }
+    };
+
+    fetchControllerData();
+
+    let intervalId;
+    if (address && contract && flatContract) {
+      intervalId = setInterval(fetchControllerData, 5000);
     }
 
-    async function getDoorState(){
-      let doorState = await vaultContract.call("get_door_state", [])
-      setDoorOpen(doorState)
-    }
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [address, contract, flatContract]);
 
-    useEffect(() => {
-
-      const fetchControllerData = () => {
-        console.log("fetching")
-        if (address) {
-          getController();
-        }
-      };
-
-      fetchControllerData()
-      getDoorState()
-      const intervalId = setInterval(fetchControllerData, 5000);
-
-      return () => {clearInterval(intervalId);}
-    }, [address])
-
-    const calls = useMemo(() => {
-      if (!depositedContractAddress|| !contract) return [];
-      return contract.populate("call_function", {
-        contract_address: depositedContractAddress,
-        function_selector: TOOGLE_SELECTOR,
-        call_data: []
-      })
-      
-      
-      // Transaction["call_function"]([depositedContractAddress, TOOGLE_SELECTOR, []]); depositedContractAddress, TOOGLE_SELECTOR, ['']
-      
-    }, [contract, address])
-
-    const { writeAsync, data, isPending } = useContractWrite({
-      calls,
+  const calls = useMemo(() => {
+    if (!depositedContractAddress || !contract) return [];
+    return contract.populate("call_function", {
+      contract_address: depositedContractAddress,
+      function_selector: TOOGLE_SELECTOR,
+      call_data: [],
     });
 
-    return { currentController, hasControl, writeAsync, doorOpen, propertyAddress }
+    // Transaction["call_function"]([depositedContractAddress, TOOGLE_SELECTOR, []]); depositedContractAddress, TOOGLE_SELECTOR, ['']
+  }, [contract, address]);
+
+  const { writeAsync, data, isPending } = useContractWrite({
+    calls,
+  });
+
+  return {
+    currentController,
+    hasControl,
+    writeAsync,
+    doorOpen,
+    propertyAddress,
+    depositedContractAddress,
+  };
 }
 
-export default useVault
+export default useVault;

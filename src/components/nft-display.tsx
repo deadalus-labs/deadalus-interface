@@ -20,10 +20,7 @@ import { VAULT_ADDRESS } from "@/lib/constants/contract_address";
 import Image from "next/image";
 import { NFTCard } from "./nft-card";
 
-const exampleProperty =
-  "0x0237a3789dc57c95c957e5b9206cb3a4cf07c0989368835d7446697d83da66c6";
-
-export const DisplayNFTs = () => {
+export const DisplayNFTs = (propertyAddress: any) => {
   const [abi, setAbi] = useState<any>();
   const [NFTabi, setNFTabi] = useState<any>();
   const [contract, setContract] = useState<any>();
@@ -42,14 +39,16 @@ export const DisplayNFTs = () => {
     setSelectedNFT(index);
   };
 
+  console.log("property address", propertyAddress.propertyAddress);
+
   /// Set ABIs
 
-  const getNFTAbi = async (provider: any, contractAddress: string) => {
-    const { abi: contractAbi } = await providerGoerli.getClassAt(
-      contractAddress
-    );
-    setNFTabi(contractAbi);
-  };
+  // const getNFTAbi = async (provider: any, contractAddress: string) => {
+  //   const { abi: contractAbi } = await providerGoerli.getClassAt(
+  //     contractAddress
+  //   );
+  //   setNFTabi(contractAbi);
+  // };
 
   /// Get NFT Cotract Address
 
@@ -101,7 +100,7 @@ export const DisplayNFTs = () => {
 
   useEffect(() => {
     if (contract) {
-      getNFTaddress(exampleProperty);
+      getNFTaddress(propertyAddress.propertyAddress);
     }
   }, [contract]);
 

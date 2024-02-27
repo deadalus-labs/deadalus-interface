@@ -4,15 +4,24 @@ import { useAccount } from "@starknet-react/core";
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import CandleStickIcon from "./icons/candle-stick-icon";
-import { Account, RpcProvider, Contract, CallData, num, hash, shortString } from "starknet";
+import {
+  Account,
+  RpcProvider,
+  Contract,
+  CallData,
+  num,
+  hash,
+  shortString,
+} from "starknet";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import clsx from "clsx";
-import { VAULT_ADDRESS, TOOGLE_SELECTOR } from "@/lib/constants/contract_address";
+import {
+  VAULT_ADDRESS,
+  TOOGLE_SELECTOR,
+} from "@/lib/constants/contract_address";
 import FractionalizeIcon from "./icons/fractionalize-icon";
 import { Input } from "@/components/ui/input";
 import { Link } from "lucide-react";
-
-
 
 const Fractionalize = () => {
   const [frequency, setFrequency] = useState("daily");
@@ -137,7 +146,6 @@ const Fractionalize = () => {
     }
   }, [abi]); // This effect runs when `abi` changes
 
-  
   return (
     <Card className="flex flex-col w-full md:w-[80%] sm:mx-auto text-white bg-[#111827A6]/65 py-5 px-5 sm:px-10 space-y-10 border-0">
       <div className="w-full flex items-center justify-between">
@@ -174,7 +182,7 @@ const Fractionalize = () => {
             className={clsx(
               "text-base text-white px-5 sm:px-10 border-2 border-[#16A24A]",
               frequency === "daily" &&
-              "bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
+                "bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
             )}
           >
             Daily
@@ -184,7 +192,7 @@ const Fractionalize = () => {
             className={clsx(
               "text-base text-white px-5 sm:px-10 border-2 border-[#16A24A]",
               frequency === "weekly" &&
-              "bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
+                "bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
             )}
           >
             Weekly
@@ -194,7 +202,7 @@ const Fractionalize = () => {
             className={clsx(
               "text-base text-white px-5 sm:px-10 border-2 border-[#16A24A]",
               frequency === "monthly" &&
-              "bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
+                "bg-[#16A24A] hover:bg-[#16A24A] focus:bg-[#16A24A]"
             )}
           >
             Monthly
@@ -202,8 +210,11 @@ const Fractionalize = () => {
         </div>
       </CardHeader>
       <CardContent className="flex justify-center border-2 border-slate-800 rounded-lg pt-6 text-slate-300 text-lg sm:text-xl">
-        You are creating <span className="font-bold ml-1 text-white">{frequency === 'daily' ? "365" : frequency === 'weekly' ?
-          "52" : "12"} tokens</span>
+        You are creating{" "}
+        <span className="font-bold ml-1 text-white">
+          {frequency === "daily" ? "7" : frequency === "weekly" ? "52" : "12"}{" "}
+          tokens
+        </span>
       </CardContent>
       <div className="flex">
         <Button
@@ -224,13 +235,8 @@ const Fractionalize = () => {
         Go the fractionalized contract - disable when contract is not deployed
         yet
       </button>
-<<<<<<< HEAD
       -------------- For debugging --------
       <p> VaultContractAddress: {shortAddress(VAULT_ADDRESS)}</p>
-=======
-      {/* -------------- For debugging --------
-      <p> VaultContractAddress: {VAULT_ADDRESS}</p> */}
->>>>>>> origin/develop_philip
     </Card>
   );
 };
