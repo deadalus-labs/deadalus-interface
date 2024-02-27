@@ -10,22 +10,27 @@ import CandleStickIcon from './icons/candle-stick-icon';
 import Image from 'next/image';
 import FractionalNFTDisplay from './fractional-nft-display';
 
-import useController from '@/hooks/use_controller';
+import useVault from '@/hooks/use_vault';
 
 
 const CounterDetail = () => {
-	const [open, setOpen] = useState(false);
+
+	const { currentController, hasControl, writeAsync, doorOpen } = useVault("0x07a6a17706eae52c01c1ab4e92bdf5f5bf70c5fac4e67f700c5b5fb287c40e9a")
 
 	const openFunction = () => {
-		setOpen(true);
+		if (doorOpen == true){
+			return;
+		}
+		writeAsync();
 	}
-
 	const closeFunction = () => {
-		setOpen(false);
+		if (doorOpen == false){
+			return;
+		}
+		writeAsync();
 	}
 
-	const { currentController } = useController()
-	
+
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
 			<div className='w-full flex items-center justify-between'>
@@ -42,7 +47,7 @@ const CounterDetail = () => {
 								<Image src='/property.png' alt='property image' width={300} height={200} />
 							</div>
 							<div className='border-2 border-slate-800 rounded-lg w-72 p-3.5 text-center'>
-								<p>{open ? "Door Opened" : "Door Closed"}</p>
+								<p>{doorOpen ? "Door Opened" : "Door Closed"}</p>
 							</div>
 							<div className='flex space-x-5 items-center w-72 justify-between'>
 								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={openFunction}>Open Door</Button>
@@ -51,10 +56,18 @@ const CounterDetail = () => {
 							<div>
 								<p className='text-base sm:text-2xl font-normal'>Apartment Location</p>
 							</div>
+							<div>
+								<p className='text-base font-normal'>Current Controller {currentController}</p>
+							</div>
 						</div>
 					</div>
 					<div className='h-fit border-2 border-slate-800 rounded-lg text-center p-5'>
-						<p className='text-slate-300 text-lg'>You currently don{"’"}t have permission to call Deadalus property contract.</p>
+						{
+							hasControl ?
+							<p className='text-slate-300 text-lg'>You have control!</p>
+							:
+							<p className='text-slate-300 text-lg'>You currently don{"’"}t have permission to call Deadalus property contract.</p>
+						}
 					</div>
 				</div>
 				<FractionalNFTDisplay />
