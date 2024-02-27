@@ -30,27 +30,35 @@ function useVault(depositedContractAddress) {
     address: VAULT_ADDRESS,
   });
 
+
   const { contract: flatContract } = useContract({
     abi: flatABI,
     address: depositedContractAddress,
   });
 
   async function getController() {
-    let currentController = await contract.call("get_controller", [
-      depositedContractAddress,
-    ]);
-    currentController = `0x${currentController.toString(16)}`;
-    setCurrentController(currentController);
-    if (address == currentController) {
-      setHasControl(true);
-    } else {
-      setHasControl(false);
+    if (contract) {
+      try {
+        console.log("getting controller");
+        let currentController = await contract.call("get_controller", [depositedContractAddress]);
+        currentController = `0x${currentController.toString(16)}`;
+        setCurrentController(currentController);
+        setHasControl(address === currentController);
+      } catch (error) {
+        console.error("Failed to get controller:", error);
+      }
     }
   }
 
   async function getDoorState() {
-    let doorState = await flatContract.call("get_door_state", []);
-    setDoorOpen(doorState);
+    if (flatContract) { // Adding check to ensure flatContract is defined.
+      try {
+        let doorState = await flatContract.call("get_door_state", []);
+        setDoorOpen(doorState);
+      } catch (error) {
+        console.error("Failed to get door state:", error);
+      }
+    }
   }
 
   useEffect(() => {
