@@ -23,6 +23,7 @@ function useVault(depositedContractAddress){
     const [ doorOpen, setDoorOpen] = useState(false)
     const [ propertyAddress, setPropertyAddress ] = useState('1234 Starknet Lane')
 
+    
     const { contract } = useContract({
       abi: fractionVaultABI,
       address: VAULT_ADDRESS,
@@ -50,20 +51,29 @@ function useVault(depositedContractAddress){
     }
 
     useEffect(() => {
-
       const fetchControllerData = () => {
-        console.log("fetching")
-        if (address) {
+        console.log("fetching");
+        if (address && contract && vaultContract) { // Ensure contract instances are available
           getController();
+          getDoorState();
         }
       };
-
-      fetchControllerData()
-      getDoorState()
-      const intervalId = setInterval(fetchControllerData, 5000);
-
-      return () => {clearInterval(intervalId);}
-    }, [address])
+    
+      // Initially try to fetch data if the conditions are met
+      fetchControllerData();
+    
+      // Setup the interval only if the conditions are met
+      let intervalId;
+      if (address && contract && vaultContract) {
+        intervalId = setInterval(fetchControllerData, 5000);
+      }
+    
+      return () => {
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+      };
+    }, [address, contract, vaultContract]);
 
     const calls = useMemo(() => {
       if (!depositedContractAddress|| !contract) return [];
