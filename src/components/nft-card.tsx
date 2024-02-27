@@ -20,6 +20,15 @@ import { VAULT_ADDRESS } from "@/lib/constants/contract_address";
 import Image from "next/image";
 import { shortAddress } from "@/lib/utils";
 import { SendModal } from "./sendmodal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "./ui/input";
 
 const exampleProperty =
   "0x0237a3789dc57c95c957e5b9206cb3a4cf07c0989368835d7446697d83da66c6";
@@ -41,29 +50,20 @@ export const NFTCard: React.FC<NFTCardProps> = ({
   const [id, setId] = useState<number>();
 
   return (
-    <>
-      <p> VaultContractAddress: {VAULT_ADDRESS}</p>
-      <button
-        onClick={() => {
-          console.log(owners);
-        }}
-      >
-        {" "}
-        NFT ABI
-      </button>
-      <div className="max-h-[calc(100vh-4rem)] overflow-auto">
-        <div className="grid grid-cols-3 gap-4">
+    <div>
+      <div className="border-b-2 border-slate-800 py-2.5 px-5">
+        <p> Vault Contract Address: {shortAddress(VAULT_ADDRESS)}</p>
+      </div>
+      <div className="p-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
           {owners &&
             owners.map((owner: any, index: number) => (
               <div
                 key={index}
                 onClick={() => setSelectedNFT(index + 1)}
-                className={clsx(
-                  "card w-96 bg-base-100 shadow-xl",
-                  { "bg-green-500": account?.address === owner } // Replace 'bg-green-500' with your desired green background class
-                )}
+                className={"card w-fit bg-base-100 shadow-xl"}
               >
-                <figure className="relative max-w-[200px] max-h-[200px] rounded-lg">
+                <figure className="relative mb-2 max-w-[200px] max-h-[200px] rounded-lg">
                   <Image
                     src="/bg-deadalus-logo.png"
                     alt="property image"
@@ -72,25 +72,23 @@ export const NFTCard: React.FC<NFTCardProps> = ({
                     layout="responsive"
                   />
                 </figure>
-                <div className="card-body">
-                  <h2 className="card-title"> {index + 1}. half of minute</h2>
-                  <p>{shortAddress(owner)}</p>
+                <div className="card-body space-y-2">
+                  <h2 className="card-title text-slate-400 capitalize text-base font-semibold"> {index + 1}. half of minute</h2>
+                  <p className="text-sm">{shortAddress(owner)}</p>
                   <div className="card-actions justify-end">
                     {account?.address === owner && (
-                      <button
-                        className="btn"
-                        onClick={() => {
-                          const modal = document.getElementById("my_modal_1");
-                          setId(index + 1);
-                          if (modal instanceof HTMLDialogElement) {
-                            modal.showModal();
-                          } else {
-                            console.error("Element is not a dialog");
-                          }
-                        }}
-                      >
-                        Send
-                      </button>
+                      <Dialog>
+                        <DialogTrigger className={clsx("btn px-3.5 py-0.5 border-2 border-green-500 rounded-lg", { "bg-green-500": account?.address === owner })}>Send</DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader className="space-y-3.5">
+                            <DialogTitle>Send Fraction to</DialogTitle>
+                            <DialogDescription>
+                              <Input className="w-full border-2 border-black rounded-lg focus-visible:ring-0 focus-visible:ring-offset-0" placeholder="Enter receiver’s wallet" />
+                              <Button className="w-full mt-3.5 bg-green-500 text-white hover:bg-green-500 focus:bg-green-500">Send</Button>
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
                     )}
                   </div>
                 </div>
@@ -101,6 +99,6 @@ export const NFTCard: React.FC<NFTCardProps> = ({
       {id && (
         <SendModal provider={provider} id={id} NFTContract={NFTContract} />
       )}
-    </>
+    </div>
   );
 };
