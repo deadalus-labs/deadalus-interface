@@ -152,8 +152,13 @@ export const DisplayFlats = () => {
             </div>
           ))}
       </div>
+<<<<<<< HEAD
       -------for debugging -------
       <p> VaultContractAddress: {shortAddress(VAULT_ADDRESS)}</p>
+=======
+      {/* -------for debugging -------
+      <p> VaultContractAddress: {VAULT_ADDRESS}</p> */}
+>>>>>>> origin/develop_philip
     </Card>
   );
 };
