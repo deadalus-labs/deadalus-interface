@@ -34,9 +34,18 @@ const CounterDetail = () => {
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
 			<div className="w-full flex justify-between space-x-2.5">
 				<div>
-					<h1 className="text-lg sm:text-2xl font-semibold">{propertyNames[id]}</h1>
+					<h1 className="text-lg sm:text-2xl font-semibold">
+						{propertyNames[id]}
+					</h1>
 					<h2 className="font-semibold mt-2">
-						<a href={`https://goerli.voyager.online/contract/${contract}`} className="text-gray hover:text-blue-800 visited:text-gray" target="_blank" rel="noopener noreferrer">{shortAddress(contract)}</a>
+						<a
+							href={`https://goerli.voyager.online/contract/${contract}`}
+							className="text-gray hover:text-blue-800 visited:text-gray"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							{contract ? shortAddress(contract) : "N/A"}
+						</a>
 					</h2>
 				</div>
 				<Button className="bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]">
@@ -60,10 +69,11 @@ const CounterDetail = () => {
 							</div>
 							<div className="flex space-x-5 items-center w-72 justify-between">
 								<Button
-									className={`bg-transparent ${hasControl
-										? "hover:bg-[#16A24A] focus:bg-[#16A24A] border-[#16A24A]"
-										: "hover:bg-[#EF4444] focus:bg-[#EF4444] border-[#EF4444]"
-										} flex-1 border-2 text-base`}
+									className={`bg-transparent ${
+										hasControl
+											? "hover:bg-[#16A24A] focus:bg-[#16A24A] border-[#16A24A]"
+											: "hover:bg-[#EF4444] focus:bg-[#EF4444] border-[#EF4444]"
+									} flex-1 border-2 text-base`}
 									onClick={() => writeAsync()}
 									disabled={!hasControl}
 								>
