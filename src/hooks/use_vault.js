@@ -39,6 +39,8 @@ function useVault(depositedContractAddress){
       setCurrentController(currentController)
       if (address == currentController){
         setHasControl(true)
+      } else{
+        setHasControl(false)
       }
     }
 

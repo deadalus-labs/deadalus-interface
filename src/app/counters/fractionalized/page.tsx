@@ -1,10 +1,11 @@
 import CounterDetail from "@/components/counter-detail";
+import React, { Suspense } from 'react';
 
 const ContractFractionalized = () => {
 	return (
-		<div>
+		<Suspense fallback={<div>Loading...</div>}>
 			<CounterDetail />
-		</div>
+		</Suspense>
 	);
 };
 
