@@ -18,6 +18,16 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import clsx from "clsx";
 import { VAULT_ADDRESS } from "@/lib/constants/contract_address";
 import Image from "next/image";
+import { PushSpinner, SwishSpinner } from "react-spinners-kit";
+
+
+
+const shortAddress = (address: string) => {
+  let displayAddress = address?.slice(0, 5) + "..." + address?.slice(-4);
+  return displayAddress;
+};
+
+
 
 export const DisplayFlats = () => {
   const [frequency, setFrequency] = useState("daily");
@@ -26,7 +36,7 @@ export const DisplayFlats = () => {
   const [propertyAddress, setPropertyAddress] = useState("");
   const [ownerAddress, setOwnerAddress] = useState("");
   const { account } = useAccount();
-  const [events, setEvents] = useState<any>();
+  const [events, setEvents] = useState<any>({events: []});
 
   const handleFrequencyChange = (frequency: string) => setFrequency(frequency);
 
@@ -112,48 +122,60 @@ export const DisplayFlats = () => {
       getEvents();
     }
   }, [contract]);
-  return (
-    <Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
-      <div className="w-full flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">
-          Fractionalize your real estate with Starknet
-        </h1>
-        <Button className="bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]">
-          <CandleStickIcon />
-        </Button>
-      </div>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {events &&
-          events.events.map((flat: any, index: number) => (
-            <div
-              key={index}
-              className="card max-w-[400px] bg-base-100 shadow-xl border-2 border-[#D9D9D9]/30 rounded-2xl"
-            >
-              <figure className="relative max-w-[400px] max-h-[200px] rounded-t-2xl">
-                <Image
-                  src="/property-1.png"
-                  alt="property image"
-                  width={400}
-                  height={200}
-                  layout="responsive"
-                />
-              </figure>
-              <div className="card-body px-3.5">
-                <h2 className="card-title py-3">North Strathfield Concord West</h2>
-                <p>{shortAddress(flat.data[0])}</p>
-                <div className="card-actions justify-end py-3">
-                  <Link href={`/counters/fractionalized?contract=${flat.data[0]}`}>
-                    <Button className="btn btn-primary rounded-lg px-6 bg-green-600 hover:bg-green-600 focus:bg-green-600">
-                      Enter
-                    </Button>
-                  </Link>
-                </div>
+
+    console.log(events)
+
+    return (
+      <Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
+        <div className="w-full flex items-center justify-between">
+          <h1 className="text-2xl font-semibold">
+            Deadalus Vault 
+          </h1>
+          <Button className="bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]">
+            <CandleStickIcon />
+          </Button>
+        </div>
+            {
+              events.events.length > 0 ?
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 min-w-[700px] min-h-[900px]">
+                  {
+                        events.events.map((flat: any, index: number) => (
+                          <div
+                          key={index}
+                          className="card max-w-[400px] bg-base-100 shadow-xl border-2 border-[#D9D9D9]/30 rounded-2xl"
+                        >
+                          <figure className="relative max-w-[400px] max-h-[200px] rounded-t-2xl">
+                            <Image
+                              src="/property-1.png"
+                              alt="property image"
+                              width={400}
+                              height={200}
+                              layout="responsive"
+                            />
+                          </figure>
+                            <div className="card-body px-3.5">
+                              <h2 className="card-title py-3">North Strathfield Concord West</h2>
+                              <p>{shortAddress(flat.data[0])}</p>
+                              <div className="card-actions justify-end py-3">
+                                <Link href={`/counters/fractionalized?contract=${flat.data[0]}`}>
+                                  <Button className="btn btn-primary rounded-lg px-6 bg-green-600 hover:bg-green-600 focus:bg-green-600">
+                                    Enter
+                                  </Button>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                    )
+                  }
               </div>
-            </div>
-          ))}
-      </div>
-      -------for debugging -------
-      <p> VaultContractAddress: {shortAddress(VAULT_ADDRESS)}</p>
-    </Card>
-  );
+              : 
+              <div className="flex justify-center items-center bg-gray-800 w-full min-w-[700px] min-h-[900px]">
+                <SwishSpinner size={100} color="#ffffff" />
+              </div>
+            }
+      </Card>
+    );
 };
+
+
