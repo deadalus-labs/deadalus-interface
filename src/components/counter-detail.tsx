@@ -17,9 +17,7 @@ const CounterDetail = () => {
 
 	const searchParams = useSearchParams()
 	const contract = searchParams.get("contract")
-	console.log(searchParams)
 	const { currentController, hasControl, writeAsync, doorOpen, propertyAddress } = useVault(contract)
-
 
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">

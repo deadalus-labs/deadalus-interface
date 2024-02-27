@@ -50,18 +50,11 @@ function useVault(depositedContractAddress){
       setDoorOpen(doorState)
     }
 
-    console.log("flat contract", flatContract)
-
     useEffect(() => {
       const fetchControllerData = () => {
-        console.log("fetching");
-        console.log(address, contract, flatContract )
         if (address && contract && flatContract) {
-          console.log("getting control")
           getController();
           getDoorState();
-        } else{
-          console.log("here2")
         }
       };
     
