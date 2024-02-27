@@ -29,20 +29,29 @@ import {
 } from "@starknet-react/core";
 import { fractionVaultABI } from "@/lib/constants/fraction_vault";
 
+import { VAULT_ADDRESS } from "@/lib/constants/contract_address";
+
+
 const CounterDeposit = () => {
+	const [depositAddress, setDepositAddress] = useState<string>("")
+
+	const handleInputChange = (event: any) => {
+		setDepositAddress(event.target.value);
+	};
+
 	const { address } = useAccount();
 	const { contract } = useContract({
 		abi: fractionVaultABI,
-		address: "0x7838bb8d77bccf18a0086df1923e4de0d4818bfb128ff9b106187bbb1b0c867",
+		address: VAULT_ADDRESS,
 	});
 
 	const calls = useMemo(() => {
-		if (!address || !contract) return [];
-		return contract.populateTransaction["deposit_contract"]!(address, {
+		if (!depositAddress || !contract) return [];
+		return contract.populateTransaction["deposit_contract"]!(depositAddress, {
 			low: 1,
 			high: 0,
 		});
-	}, [contract, address])
+	}, [contract, depositAddress]);
 
 	const { writeAsync, data, isPending } = useContractWrite({
 		calls,
@@ -56,6 +65,8 @@ const CounterDeposit = () => {
 					<div className="flex flex-col items-center justify-center space-y-1 w-2/3">
 						<Input
 							type="text"
+							value={depositAddress}
+							onChange={handleInputChange}
 							placeholder="Deposit Cairo Contract"
 							className="w-full bg-transparent px-5 py-7 border-slate-800 focus-visible:ring-offset-0 focus-visible:ring-0"
 						/>
