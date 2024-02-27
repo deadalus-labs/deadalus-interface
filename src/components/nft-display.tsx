@@ -33,13 +33,8 @@ export const DisplayNFTs = (propertyAddress: any) => {
 
 	const providerGoerli = new RpcProvider({
 		nodeUrl: "https://starknet-testnet.public.blastapi.io/rpc/v0_6",
-	});
+	});;
 
-	const handleNFTSelect = (index: number) => {
-		setSelectedNFT(index);
-	};
-
-	console.log("property address", propertyAddress.propertyAddress);
 
 	/// Set ABIs
 
@@ -59,7 +54,6 @@ export const DisplayNFTs = (propertyAddress: any) => {
 
 	const getOwnerOfNFT = async (NFTcontract: any, id: Number) => {
 		const owner = await NFTcontract.owner_of(id);
-		console.log(`0x${owner.toString(16)}`);
 		return `0x${owner.toString(16)}`;
 	};
 
@@ -109,7 +103,6 @@ export const DisplayNFTs = (propertyAddress: any) => {
 				const { abi: contractAbi } =
 					await providerGoerli.getClassAt(NFTAddress);
 				setNFTabi(contractAbi);
-				console.log("nftabi", contractAbi);
 			};
 			getAbi();
 		}
@@ -157,57 +150,6 @@ export const DisplayNFTs = (propertyAddress: any) => {
 					provider={providerGoerli}
 					NFTContract={NFTcontract}
 				/>
-				{/* -------for debugging -------
-        <p> VaultContractAddress: {VAULT_ADDRESS}</p>
-        <button
-          onClick={() => {
-            console.log(selectedNFT);
-          }}
-        >
-          {" "}
-          SelectedNFT
-        </button>
-        <button
-          onClick={() => {
-            console.log(NFTAddress);
-          }}
-        >
-          {" "}
-          NFT address for prop
-        </button>
-        <button
-          onClick={() => {
-            console.log(NFTcontract);
-          }}
-        >
-          {" "}
-          Log NFTcontract
-        </button>
-        <button
-          onClick={() => {
-            console.log(contract);
-          }}
-        >
-          {" "}
-          Log Vault contract
-        </button>
-        <button
-          onClick={() => {
-            getOwnerOfNFT(NFTcontract, 1);
-          }}
-        >
-          {" "}
-          Get Owner of NFT
-        </button>
-        <button
-          onClick={() => {
-            console.log(NFTOwners);
-          }}
-        >
-          {" "}
-          Get Owners
-        </button>
-        -------for debugging ------- */}
 			</Card>
 		</>
 	);
