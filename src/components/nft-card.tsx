@@ -30,8 +30,6 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "./ui/input";
 
-const exampleProperty =
-  "0x0237a3789dc57c95c957e5b9206cb3a4cf07c0989368835d7446697d83da66c6";
 
 interface NFTCardProps {
   owners: any;
@@ -47,7 +45,22 @@ export const NFTCard: React.FC<NFTCardProps> = ({
   NFTContract,
 }) => {
   const { account } = useAccount();
-  const [id, setId] = useState<number>();
+  const [receiver, setReceiver] = useState<string>("");
+
+  const handleInputChange = (event: any) => {
+		setReceiver(event.target.value);
+	};
+
+  const transferNFT = async (owner: string, receiver: string, id: number) => {
+    try{
+      const myCall = NFTContract.populate("transfer_from", [owner, receiver, id]);
+      NFTContract.connect(account);
+      const res = await NFTContract.transfer_from(myCall.calldata);
+      await provider.waitForTransaction(res.transaction_hash);
+    } catch (e){
+      console.log(e)
+    }
+  };
 
   return (
     <div>
@@ -83,8 +96,15 @@ export const NFTCard: React.FC<NFTCardProps> = ({
                           <DialogHeader className="space-y-3.5">
                             <DialogTitle>Send Fraction to</DialogTitle>
                             <DialogDescription>
-                              <Input className="w-full border-2 border-black rounded-lg focus-visible:ring-0 focus-visible:ring-offset-0" placeholder="Enter receiver’s wallet" />
-                              <Button className="w-full mt-3.5 bg-green-500 text-white hover:bg-green-500 focus:bg-green-500">Send</Button>
+                              <Input 
+                                className="w-full border-2 border-black rounded-lg focus-visible:ring-0 focus-visible:ring-offset-0" 
+                                placeholder="Enter receiver’s wallet"
+                                onChange={handleInputChange}
+                              />
+                              <Button 
+                                className="w-full mt-3.5 bg-green-500 text-white hover:bg-green-500 focus:bg-green-500"
+                                onClick={()=>transferNFT((account ? account.address : ''), receiver, index + 1)}
+                              >Send</Button>
                             </DialogDescription>
                           </DialogHeader>
                         </DialogContent>
@@ -96,9 +116,6 @@ export const NFTCard: React.FC<NFTCardProps> = ({
             ))}
         </div>
       </div>
-      {id && (
-        <SendModal provider={provider} id={id} NFTContract={NFTContract} />
-      )}
     </div>
   );
 };

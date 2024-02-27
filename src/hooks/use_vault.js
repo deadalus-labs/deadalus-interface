@@ -105,6 +105,7 @@ function useVault(depositedContractAddress) {
     doorOpen,
     propertyAddress,
     depositedContractAddress,
+    isPending
   };
 }
 
