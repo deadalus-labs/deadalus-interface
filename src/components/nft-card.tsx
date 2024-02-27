@@ -63,7 +63,7 @@ export const NFTCard: React.FC<NFTCardProps> = ({
                 onClick={() => setSelectedNFT(index + 1)}
                 className={"card w-fit bg-base-100 shadow-xl"}
               >
-                <figure className="relative max-w-[200px] max-h-[200px] rounded-lg">
+                <figure className="relative mb-2 max-w-[200px] max-h-[200px] rounded-lg">
                   <Image
                     src="/bg-deadalus-logo.png"
                     alt="property image"
@@ -72,8 +72,8 @@ export const NFTCard: React.FC<NFTCardProps> = ({
                     layout="responsive"
                   />
                 </figure>
-                <div className="card-body space-y-1">
-                  <h2 className="card-title text-slate-400 text-base font-semibold"> {index + 1}. half of minute</h2>
+                <div className="card-body space-y-2">
+                  <h2 className="card-title text-slate-400 capitalize text-base font-semibold"> {index + 1}. half of minute</h2>
                   <p className="text-sm">{shortAddress(owner)}</p>
                   <div className="card-actions justify-end">
                     {account?.address === owner && (
