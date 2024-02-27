@@ -28,8 +28,9 @@ const CounterDetail = () => {
 		doorOpen,
 		propertyAddress,
 		depositedContractAddress,
+		isPending
 	} = useVault(contract);
-
+	
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
 			<div className="w-full flex justify-between space-x-2.5">
@@ -77,7 +78,7 @@ const CounterDetail = () => {
 									onClick={() => writeAsync()}
 									disabled={!hasControl}
 								>
-									{doorOpen ? "Close Door" : "Open Door"}
+									{!isPending ? doorOpen ? "Close Door" : "Open Door" : "loading"}
 								</Button>
 							</div>
 							<div>
