@@ -20,6 +20,15 @@ import { VAULT_ADDRESS } from "@/lib/constants/contract_address";
 import Image from "next/image";
 import { shortAddress } from "@/lib/utils";
 import { SendModal } from "./sendmodal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "./ui/input";
 
 const exampleProperty =
   "0x0237a3789dc57c95c957e5b9206cb3a4cf07c0989368835d7446697d83da66c6";
@@ -68,20 +77,18 @@ export const NFTCard: React.FC<NFTCardProps> = ({
                   <p className="text-sm">{shortAddress(owner)}</p>
                   <div className="card-actions justify-end">
                     {account?.address === owner && (
-                      <button
-                        className={clsx("btn px-3.5 py-1.5 border-2 border-green-500 rounded-lg", { "bg-green-500": account?.address === owner })}
-                        onClick={() => {
-                          const modal = document.getElementById("my_modal_1");
-                          setId(index + 1);
-                          if (modal instanceof HTMLDialogElement) {
-                            modal.showModal();
-                          } else {
-                            console.error("Element is not a dialog");
-                          }
-                        }}
-                      >
-                        Send
-                      </button>
+                      <Dialog>
+                        <DialogTrigger className={clsx("btn px-3.5 py-0.5 border-2 border-green-500 rounded-lg", { "bg-green-500": account?.address === owner })}>Send</DialogTrigger>
+                        <DialogContent>
+                          <DialogHeader className="space-y-3.5">
+                            <DialogTitle>Send Fraction to</DialogTitle>
+                            <DialogDescription>
+                              <Input className="w-full border-2 border-black rounded-lg focus-visible:ring-0 focus-visible:ring-offset-0" placeholder="Enter receiver’s wallet" />
+                              <Button className="w-full mt-3.5 bg-green-500 text-white hover:bg-green-500 focus:bg-green-500">Send</Button>
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
                     )}
                   </div>
                 </div>
