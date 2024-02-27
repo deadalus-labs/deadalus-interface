@@ -41,27 +41,18 @@ export const NFTCard: React.FC<NFTCardProps> = ({
   const [id, setId] = useState<number>();
 
   return (
-    <>
-      <p> VaultContractAddress: {VAULT_ADDRESS}</p>
-      <button
-        onClick={() => {
-          console.log(owners);
-        }}
-      >
-        {" "}
-        NFT ABI
-      </button>
-      <div className="max-h-[calc(100vh-4rem)] overflow-auto">
-        <div className="grid grid-cols-3 gap-4">
+    <div>
+      <div className="border-b-2 border-slate-800 py-2.5 px-5">
+        <p> Vault Contract Address: {shortAddress(VAULT_ADDRESS)}</p>
+      </div>
+      <div className="p-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
           {owners &&
             owners.map((owner: any, index: number) => (
               <div
                 key={index}
                 onClick={() => setSelectedNFT(index + 1)}
-                className={clsx(
-                  "card w-96 bg-base-100 shadow-xl",
-                  { "bg-green-500": account?.address === owner } // Replace 'bg-green-500' with your desired green background class
-                )}
+                className={"card w-fit bg-base-100 shadow-xl"}
               >
                 <figure className="relative max-w-[200px] max-h-[200px] rounded-lg">
                   <Image
@@ -72,13 +63,13 @@ export const NFTCard: React.FC<NFTCardProps> = ({
                     layout="responsive"
                   />
                 </figure>
-                <div className="card-body">
-                  <h2 className="card-title"> {index + 1}. half of minute</h2>
-                  <p>{shortAddress(owner)}</p>
+                <div className="card-body space-y-1">
+                  <h2 className="card-title text-slate-400 text-base font-semibold"> {index + 1}. half of minute</h2>
+                  <p className="text-sm">{shortAddress(owner)}</p>
                   <div className="card-actions justify-end">
                     {account?.address === owner && (
                       <button
-                        className="btn"
+                        className={clsx("btn px-3.5 py-1.5 border-2 border-green-500 rounded-lg", { "bg-green-500": account?.address === owner })}
                         onClick={() => {
                           const modal = document.getElementById("my_modal_1");
                           setId(index + 1);
@@ -101,6 +92,6 @@ export const NFTCard: React.FC<NFTCardProps> = ({
       {id && (
         <SendModal provider={provider} id={id} NFTContract={NFTContract} />
       )}
-    </>
+    </div>
   );
 };

@@ -132,18 +132,7 @@ export const DisplayNFTs = (propertyAddress: any) => {
 
 	return (
 		<>
-			<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
-				<div className="w-full flex items-center justify-between">
-					<h1 className="text-2xl font-semibold">
-						Fractionalize your real estate with Starknet
-					</h1>
-					<h2 className="text-2xl font-semibold">
-						Fractionalized real estates:
-					</h2>
-					<Button className="bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]">
-						<CandleStickIcon />
-					</Button>
-				</div>
+			<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 space-y-6 border-2 border-slate-800">
 				<NFTCard
 					owners={NFTOwners}
 					setSelectedNFT={setSelectedNFT}
