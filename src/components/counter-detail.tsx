@@ -24,7 +24,10 @@ const CounterDetail = () => {
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
 			<div className='w-full flex items-center justify-between'>
-				<h1 className="text-2xl font-semibold">{propertyAddress}</h1>
+				<div>
+					<h1 className="text-2xl font-semibold">{propertyAddress}</h1>
+					<h2 className="font-semibold mt-2">{contract}</h2>
+				</div>
 				<Button className='bg-[#16A24A] focus:bg-[#16A24A] hover:bg-[#16A24A]'>
 					<CandleStickIcon />
 				</Button>
