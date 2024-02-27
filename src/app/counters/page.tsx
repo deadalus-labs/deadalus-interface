@@ -13,7 +13,6 @@ const Counters = () => {
       {/* <CounterFractionalizer /> */}
       {/* <CounterDeposit /> */}
       <Fractionalize />
-      <DisplayNFTs />
       {/* <DisplayFlats /> */}
       {/* <CounterDetail /> */}
     </div>
