@@ -17,7 +17,7 @@ const CounterDetail = () => {
 
 	const searchParams = useSearchParams()
 	const contract = searchParams.get("contract")
-
+	console.log(searchParams)
 	const { currentController, hasControl, writeAsync, doorOpen, propertyAddress } = useVault(contract)
 
 
