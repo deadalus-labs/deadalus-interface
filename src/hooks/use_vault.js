@@ -18,12 +18,13 @@ import {
 
 
 function useVault(depositedContractAddress) {
-  const { address } = useAccount();
+  const { address, account } = useAccount();
 
   const [currentController, setCurrentController] = useState("");
   const [hasControl, setHasControl] = useState(false);
   const [doorOpen, setDoorOpen] = useState(false);
   const [propertyAddress, setPropertyAddress] = useState("1234 Starknet Lane");
+  const [ transactionLoading, setTransactionLoading] = useState(false)
 
   const { contract } = useContract({
     abi: fractionVaultABI,
@@ -83,6 +84,8 @@ function useVault(depositedContractAddress) {
     };
   }, [address, contract, flatContract]);
 
+
+
   const calls = useMemo(() => {
     if (!depositedContractAddress || !contract) return [];
     return contract.populate("call_function", {
@@ -98,6 +101,29 @@ function useVault(depositedContractAddress) {
     calls,
   });
 
+  useEffect(()=>{
+  
+      async function waitForTransaction(transaction_hash){
+        try{
+          console.log("waiting for transaction")
+          const res = await account.waitForTransaction(transaction_hash)
+          console.log(res)
+          setTransactionLoading(false)
+          getController();
+          getDoorState();
+        } catch (e){
+          setTransactionLoading(false)
+          console.log(e)
+        }
+      }
+
+    if (data && data.transaction_hash){
+      setTransactionLoading(true)
+      waitForTransaction(data.transaction_hash)
+    }
+  }, [data])
+
+
   return {
     currentController,
     hasControl,
@@ -105,7 +131,8 @@ function useVault(depositedContractAddress) {
     doorOpen,
     propertyAddress,
     depositedContractAddress,
-    isPending
+    isPending,
+    transactionLoading
   };
 }
 
