@@ -17,6 +17,7 @@ import { VAULT_ADDRESS, TOOGLE_SELECTOR } from "@/lib/constants/contract_address
 
 function useVault(depositedContractAddress){
     const { address } = useAccount();
+
     const [ currentController, setCurrentController] = useState('')
     const [ hasControl, setHasControl ] = useState(false)
     const [ doorOpen, setDoorOpen] = useState(false)
@@ -34,7 +35,7 @@ function useVault(depositedContractAddress){
 
     async function getController(){
       let currentController = await contract.call("get_controller", [depositedContractAddress])
-      currentController = currentController.toString(16)
+      currentController = `0x${currentController.toString(16)}`
       setCurrentController(currentController)
       if (address == currentController){
         setHasControl(true)
@@ -43,25 +44,24 @@ function useVault(depositedContractAddress){
 
     async function getDoorState(){
       let doorState = await vaultContract.call("get_door_state", [])
-      console.log(doorState)
       setDoorOpen(doorState)
     }
 
-    // async function getAddress(){
-    //   console.log("adsf")
-    //   let propertyAddress = await vaultContract.call("get_property_address", [])
-    //   console.log(propertyAddress)
-    //   setPropertyAddress(propertyAddress)
-    // }
-
     useEffect(() => {
-      getController()
+
+      const fetchControllerData = () => {
+        console.log("fetching")
+        if (address) {
+          getController();
+        }
+      };
+
+      fetchControllerData()
       getDoorState()
-      // getAddress()
-      return () => {
-        ''
-      }
-    }, [])
+      const intervalId = setInterval(fetchControllerData, 5000);
+
+      return () => {clearInterval(intervalId);}
+    }, [address])
 
     const calls = useMemo(() => {
       if (!depositedContractAddress|| !contract) return [];

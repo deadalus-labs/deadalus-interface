@@ -20,20 +20,6 @@ const CounterDetail = () => {
 
 	const { currentController, hasControl, writeAsync, doorOpen, propertyAddress } = useVault(contract)
 
-	const openFunction = () => {
-		if (doorOpen == true){
-			return;
-		}
-		writeAsync();
-	}
-	const closeFunction = () => {
-		if (doorOpen == false){
-			return;
-		}
-		writeAsync();
-	}
-
-	
 
 	return (
 		<Card className="flex flex-col w-full mx-auto text-white bg-[#111827A6]/65 p-5 space-y-6 border-0">
@@ -54,8 +40,11 @@ const CounterDetail = () => {
 								<p>{doorOpen ? "Door Opened" : "Door Closed"}</p>
 							</div>
 							<div className='flex space-x-5 items-center w-72 justify-between'>
-								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={openFunction}>Open Door</Button>
-								<Button className='bg-transparent hover:bg-[#16A24A] focus:bg-[#16A24A] flex-1 border-2 border-[#16A24A] text-base' onClick={closeFunction}>Close Door</Button>
+							<Button 
+									className={`bg-transparent ${hasControl ? 'hover:bg-[#16A24A] focus:bg-[#16A24A] border-[#16A24A]' : 'hover:bg-[#EF4444] focus:bg-[#EF4444] border-[#EF4444]'} flex-1 border-2 text-base`} 
+									onClick={()=>writeAsync()}
+									disabled={!hasControl}
+								>{doorOpen ? "Close Door" : "Open Door"}</Button>
 							</div>
 							<div>
 								<p className='text-base sm:text-2xl font-normal'>Apartment Location</p>
