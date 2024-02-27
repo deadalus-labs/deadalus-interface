@@ -211,8 +211,8 @@ const Fractionalize = () => {
         Go the fractionalized contract - disable when contract is not deployed
         yet
       </button>
-      -------------- For debugging --------
-      <p> VaultContractAddress: {VAULT_ADDRESS}</p>
+      {/* -------------- For debugging --------
+      <p> VaultContractAddress: {VAULT_ADDRESS}</p> */}
     </Card>
   );
 };

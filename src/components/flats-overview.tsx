@@ -150,8 +150,8 @@ export const DisplayFlats = () => {
             ))}
         </div>
       </div>
-      -------for debugging -------
-      <p> VaultContractAddress: {VAULT_ADDRESS}</p>
+      {/* -------for debugging -------
+      <p> VaultContractAddress: {VAULT_ADDRESS}</p> */}
     </Card>
   );
 };
