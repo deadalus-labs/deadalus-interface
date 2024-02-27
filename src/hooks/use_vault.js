@@ -73,7 +73,7 @@ function useVault(depositedContractAddress) {
 
     let intervalId;
     if (address && contract && flatContract) {
-      intervalId = setInterval(fetchControllerData, 5000);
+      intervalId = setInterval(fetchControllerData, 7000);
     }
 
     return () => {
